@@ -14,8 +14,133 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String  @id @default(cuid())
-  email String  @unique
-  name  String?
+enum Role {
+  ADMIN
+  USER
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
+
+model Users {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  password_hash String
+  role          Role      @default(USER)
+  created_at    DateTime  @default(now())
+  carts         Carts[]
+  reviews       Reviews[]
+  orders        Orders[]
+}
+
+model Books {
+  id               String           @id @default(cuid())
+  name             String
+  author_id        String
+  price            Float
+  description      String?
+  publisher        String?
+  publication_year Int?
+  author           Authors          @relation(fields: [author_id], references: [id])
+  book_categories  BookCategories[]
+  book_images      BookImages[]
+  inventories      Inventories[]
+  reviews          Reviews[]
+  cart_items       CartItems[]
+  order_items      OrderItems[]
+}
+
+model Authors {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  books       Books[]
+}
+
+model Categories {
+  id              String           @id @default(cuid())
+  name            String
+  parent_id       String?
+  description     String?
+  parent          Categories?      @relation("CategoryHierarchy", fields: [parent_id], references: [id])
+  children        Categories[]     @relation("CategoryHierarchy")
+  book_categories BookCategories[]
+}
+
+model BookCategories {
+  book_id     String
+  category_id String
+  book        Books      @relation(fields: [book_id], references: [id])
+  category    Categories @relation(fields: [category_id], references: [id])
+
+  @@id([book_id, category_id])
+}
+
+model BookImages {
+  id         String  @id @default(cuid())
+  book_id    String
+  image_url  String
+  is_primary Boolean @default(false)
+  book       Books   @relation(fields: [book_id], references: [id])
+}
+
+model Inventories {
+  id       String @id @default(cuid())
+  book_id  String
+  quantity Int
+  book     Books  @relation(fields: [book_id], references: [id])
+}
+
+model Carts {
+  id         String      @id @default(cuid())
+  user_id    String
+  date       DateTime    @default(now())
+  user       Users       @relation(fields: [user_id], references: [id])
+  cart_items CartItems[]
+}
+
+model CartItems {
+  id       String @id @default(cuid())
+  cart_id  String
+  book_id  String
+  quantity Int
+  cart     Carts  @relation(fields: [cart_id], references: [id])
+  book     Books  @relation(fields: [book_id], references: [id])
+}
+
+model Reviews {
+  id      String   @id @default(cuid())
+  user_id String
+  book_id String
+  text    String
+  rating  Int
+  date    DateTime @default(now())
+  user    Users    @relation(fields: [user_id], references: [id])
+  book    Books    @relation(fields: [book_id], references: [id])
+}
+
+model Orders {
+  id               String       @id @default(cuid())
+  user_id          String
+  total_price      Float
+  shipping_address String
+  payment_method   String
+  date             DateTime     @default(now())
+  status           OrderStatus  @default(PENDING)
+  user             Users        @relation(fields: [user_id], references: [id])
+  order_items      OrderItems[]
+}
+
+model OrderItems {
+  id       String @id @default(cuid())
+  order_id String
+  book_id  String
+  quantity Int
+  order    Orders @relation(fields: [order_id], references: [id])
+  book     Books  @relation(fields: [book_id], references: [id])
 }

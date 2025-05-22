@@ -120,10 +120,93 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  name: 'name',
+  password_hash: 'password_hash',
+  role: 'role',
+  created_at: 'created_at'
+};
+
+exports.Prisma.BooksScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  author_id: 'author_id',
+  price: 'price',
+  description: 'description',
+  publisher: 'publisher',
+  publication_year: 'publication_year'
+};
+
+exports.Prisma.AuthorsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.CategoriesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  parent_id: 'parent_id',
+  description: 'description'
+};
+
+exports.Prisma.BookCategoriesScalarFieldEnum = {
+  book_id: 'book_id',
+  category_id: 'category_id'
+};
+
+exports.Prisma.BookImagesScalarFieldEnum = {
+  id: 'id',
+  book_id: 'book_id',
+  image_url: 'image_url',
+  is_primary: 'is_primary'
+};
+
+exports.Prisma.InventoriesScalarFieldEnum = {
+  id: 'id',
+  book_id: 'book_id',
+  quantity: 'quantity'
+};
+
+exports.Prisma.CartsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  date: 'date'
+};
+
+exports.Prisma.CartItemsScalarFieldEnum = {
+  id: 'id',
+  cart_id: 'cart_id',
+  book_id: 'book_id',
+  quantity: 'quantity'
+};
+
+exports.Prisma.ReviewsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  book_id: 'book_id',
+  text: 'text',
+  rating: 'rating',
+  date: 'date'
+};
+
+exports.Prisma.OrdersScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  total_price: 'total_price',
+  shipping_address: 'shipping_address',
+  payment_method: 'payment_method',
+  date: 'date',
+  status: 'status'
+};
+
+exports.Prisma.OrderItemsScalarFieldEnum = {
+  id: 'id',
+  order_id: 'order_id',
+  book_id: 'book_id',
+  quantity: 'quantity'
 };
 
 exports.Prisma.SortOrder = {
@@ -140,10 +223,31 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Role = exports.$Enums.Role = {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
 
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  PENDING: 'PENDING',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELED: 'CANCELED'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  Users: 'Users',
+  Books: 'Books',
+  Authors: 'Authors',
+  Categories: 'Categories',
+  BookCategories: 'BookCategories',
+  BookImages: 'BookImages',
+  Inventories: 'Inventories',
+  Carts: 'Carts',
+  CartItems: 'CartItems',
+  Reviews: 'Reviews',
+  Orders: 'Orders',
+  OrderItems: 'OrderItems'
 };
 
 /**
