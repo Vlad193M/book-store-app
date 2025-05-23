@@ -1,8 +1,24 @@
-import { prisma} from "@/lib/db";
+import ConfirmBtn from "./(auth)/ConfirmBtn";
+import Input from "./(auth)/Input";
 
-export default async function Home() {
-  const user = await   prisma.users.findMany();
-
-  console.log(user);
-  return <h1>home</h1>;
+export default async function Page() {
+  return (
+    <div className="flex flex-col gap-8">
+      <Input
+        id="email"
+        name="email"
+        label="Enter your email"
+        placeholder="michael.joe@xmail.com"
+        type="password"
+      />
+      <Input
+        id="email"
+        name="email"
+        label="Enter your email"
+        placeholder="michael.joe@xmail.com"
+        type="email"
+      />
+      <ConfirmBtn className="wefnioweio">Login</ConfirmBtn>
+    </div>
+  );
 }
