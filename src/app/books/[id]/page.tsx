@@ -38,8 +38,13 @@ export default async function Page({
       inventories: true,
     },
   });
-  
+
   if (!book) return <p>Book do not exist</p>;
+
+  const averageRating = Math.round(
+    book.reviews.reduce((acc, review) => acc + review.rating, 0) /
+      book.reviews.length || 0
+  );
 
   return (
     <div>
@@ -67,6 +72,7 @@ export default async function Page({
           price={book.price}
           description={book.description ?? ''}
           reviewsLength={book.reviews.length}
+          rating={averageRating}
         />
       </section>
 

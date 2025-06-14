@@ -7,12 +7,14 @@ import heart from '@/../public/heart.svg';
 import remove from '@/../public/remove.svg';
 import box from '@/../public/rotate-box.svg';
 import star from '@/../public/star.svg';
+import emptyStar from '@/../public/empty-star.svg';
 
 interface InfoProps {
   title: string;
   price: number;
   description: string;
   reviewsLength: number;
+  rating: number;
 }
 
 export default function Info({
@@ -20,9 +22,10 @@ export default function Info({
   price,
   description,
   reviewsLength,
+  rating,
 }: InfoProps) {
   return (
-    <div className='w-full lg:flex-[0_1_500px]'>
+    <div className='w-full max-w-[800px] lg:flex-[0_1_500px]'>
       <div className='flex justify-between mb-3'>
         <h1 className='text-[#2D2D2D] text-[26px] font-bold leading-none '>
           {title}
@@ -34,11 +37,15 @@ export default function Info({
         <p className='text-[28px] text-[#414141] leading-[1.7]'>${price}</p>
         <div className='bg-[#000] w-[1px] h-[25px] mx-2.5' />
         <div className='flex gap-0.5'>
-          <Image src={star} alt='star' />
-          <Image src={star} alt='star' />
-          <Image src={star} alt='star' />
-          <Image src={star} alt='star' />
-          <Image src={star} alt='star' />
+          {Array.from({ length: 5 }, (_, index) => (
+            <Image
+              key={index}
+              src={index < rating ? star : emptyStar}
+              alt='star'
+              width={16}
+              height={16}
+            />
+          ))}
         </div>
         <p className='ml-2.5 text-[#414141] leading-[1.7] text-[14px]'>
           ( {reviewsLength} review )
