@@ -49,7 +49,7 @@ model Books {
   author           Authors          @relation(fields: [author_id], references: [id])
   book_categories  BookCategories[]
   book_images      BookImages[]
-  inventories      Inventories[]
+  inventories      Inventories?
   reviews          Reviews[]
   cart_items       CartItems[]
   order_items      OrderItems[]
@@ -91,7 +91,7 @@ model BookImages {
 
 model Inventories {
   id       String @id @default(cuid())
-  book_id  String
+  book_id  String @unique
   quantity Int
   book     Books  @relation(fields: [book_id], references: [id])
 }

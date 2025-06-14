@@ -5,7 +5,7 @@ interface ConfirmBtnProps {
 
 export default function ConfirmBtn({
   children,
-  className = "",
+  className = '',
 }: ConfirmBtnProps) {
   return (
     <button

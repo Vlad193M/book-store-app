@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState } from 'react';
 
 interface InputsProps {
   id: string;
@@ -18,7 +18,7 @@ export default function Input({
   type,
   label,
   placeholder,
-  className = "",
+  className = '',
 }: InputsProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -28,27 +28,27 @@ export default function Input({
 
   return (
     <div className={`flex flex-col gap-2.5 ${className}`}>
-      <label className="leading-none text-[#3D3D3D]" htmlFor={id}>
+      <label className='leading-none text-[#3D3D3D]' htmlFor={id}>
         {label}
       </label>
-      {type === "password" ? (
-        <div className="flex items-center gap-2 text-[#949494] px-3.5 py-[10px] border rounded-[150px] leading-none focus-within:ring">
+      {type === 'password' ? (
+        <div className='flex items-center gap-2 text-[#949494] px-3.5 py-[10px] border rounded-[150px] leading-none focus-within:ring'>
           <input
-            className="grow focus:outline-none"
+            className='grow focus:outline-none'
             id={id}
             name={name}
-            type={isPasswordVisible ? "text" : "password"}
+            type={isPasswordVisible ? 'text' : 'password'}
             placeholder={placeholder}
             required
           />
           <button
-            type="button"
-            aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+            type='button'
+            aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
             onClick={togglePasswordVisibility}
           >
             <Image
-              src="/eye.svg"
-              alt={isPasswordVisible ? "Hide password" : "Show password"}
+              src='/eye.svg'
+              alt={isPasswordVisible ? 'Hide password' : 'Show password'}
               width={30}
               height={30}
             />
@@ -56,7 +56,7 @@ export default function Input({
         </div>
       ) : (
         <input
-          className="text-[#949494] focus:outline-none py-[15px] px-3.5 border rounded-[150px] leading-none focus:ring"
+          className='text-[#949494] focus:outline-none py-[15px] px-3.5 border rounded-[150px] leading-none focus:ring'
           id={id}
           name={name}
           type={type}

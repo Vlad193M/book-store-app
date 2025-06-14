@@ -1,15 +1,15 @@
-import { db } from "@/lib/db";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
+import { db } from '@/lib/db';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   const { name, email, password } = await request.json();
 
   if (!name || !email || !password) {
     return NextResponse.json(
-      { message: "Invalid data format" },
-      { status: 400 }
+      { message: 'Invalid data format' },
+      { status: 400 },
     );
   }
 
@@ -25,16 +25,16 @@ export async function POST(request: Request) {
     });
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
-      expiresIn: "24h",
+      expiresIn: '24h',
     });
 
     const response = NextResponse.json({ success: true }, { status: 201 });
 
-    response.cookies.set("token", token, {
+    response.cookies.set('token', token, {
       httpOnly: true,
       maxAge: 60 * 60 * 24,
-      sameSite: "lax",
-      path: "/",
+      sameSite: 'lax',
+      path: '/',
     });
 
     return response;
@@ -44,9 +44,9 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "The server is temporarily unavailable. Please try again later.",
+          'The server is temporarily unavailable. Please try again later.',
       },
-      { status: 503 }
+      { status: 503 },
     );
   }
 }

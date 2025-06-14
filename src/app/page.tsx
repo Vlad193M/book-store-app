@@ -1,24 +1,24 @@
-import ConfirmBtn from "./(auth)/ConfirmBtn";
-import Input from "./(auth)/Input";
+import ConfirmBtn from './(auth)/components/ConfirmBtn';
+import Input from './(auth)/components/Input';
 
 export default async function Page() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className='container flex flex-col gap-8'>
       <Input
-        id="email"
-        name="email"
-        label="Enter your email"
-        placeholder="michael.joe@xmail.com"
-        type="password"
+        id='email'
+        name='email'
+        label='Enter your email'
+        placeholder='michael.joe@xmail.com'
+        type='password'
       />
       <Input
-        id="email"
-        name="email"
-        label="Enter your email"
-        placeholder="michael.joe@xmail.com"
-        type="email"
+        id='email'
+        name='email'
+        label='Enter your email'
+        placeholder='michael.joe@xmail.com'
+        type='email'
       />
-      <ConfirmBtn className="wefnioweio">Login</ConfirmBtn>
+      <ConfirmBtn className='wefnioweio'>Login</ConfirmBtn>
     </div>
   );
 }
