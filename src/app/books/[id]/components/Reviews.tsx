@@ -1,16 +1,11 @@
 import Image from 'next/image';
 
-import star from '@/../public/star.svg';
 import emptyStar from '@/../public/empty-star.svg';
+import star from '@/../public/star.svg';
+import { ReviewComponentType } from '@/types/book';
 
 interface ReviewsProps {
-  reviews: {
-    id: string;
-    text: string;
-    rating: number;
-    date: Date;
-    user: { name: string };
-  }[];
+  reviews: ReviewComponentType[];
 }
 
 interface ReviewItemProps {
@@ -42,7 +37,7 @@ function ReviewItem({ name, text, date, rating }: ReviewItemProps) {
       <div className='flex justify-between'>
         <p className='text-[#3d3d3d]'>{name}</p>
         <div className='flex gap-0.5'>
-         {Array.from({ length: 5 }, (_, index) => (
+          {Array.from({ length: 5 }, (_, index) => (
             <Image
               key={index}
               src={index < rating ? star : emptyStar}

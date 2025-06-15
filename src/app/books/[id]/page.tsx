@@ -1,5 +1,3 @@
-import { db } from '@/lib/db';
-
 import { Suspense } from 'react';
 import ImagesSwapper from './components/ImagesSwapper';
 import Info from './components/Info';
@@ -7,9 +5,11 @@ import SimilarBooks from './components/SimilarBooks';
 import SimilarBooksSkeleton from './components/SimilarBooksSkeleton';
 
 import arrowRight from '@/../public/arrow-right.svg';
+import { getBookPageData } from '@/lib/db/books';
 import Image from 'next/image';
 import Link from 'next/link';
 import Details from './components/Details';
+import { extractDescriptionData } from '@/lib/utils/bookDataTransform';
 
 export default async function Page({
   params,
@@ -18,26 +18,9 @@ export default async function Page({
 }) {
   const { id } = await params;
 
-  const book = await db.books.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      book_images: true,
-      reviews: {
-        select: {
-          id: true,
-          text: true,
-          date: true,
-          rating: true,
-          user: { select: { name: true } },
-        },
-      },
-      author: true,
-      book_categories: true,
-      inventories: true,
-    },
-  });
+  const book = await getBookPageData(id);
+
+  const descriptionData = extractDescriptionData(book);
 
   if (!book) return <p>Book do not exist</p>;
 
@@ -78,7 +61,7 @@ export default async function Page({
 
       <Details
         key={book.id}
-        description={book.description ?? ''}
+        descriptionData={descriptionData}
         reviews={book.reviews}
       />
 

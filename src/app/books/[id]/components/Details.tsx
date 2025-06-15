@@ -1,23 +1,17 @@
 'use client';
 
+import { DescriptionComponentType, ReviewComponentType } from '@/types/book';
 import { useState } from 'react';
 import Description from './Description';
-import Reviews from './Reviews';
 import ReviewForm from './ReviewForm';
-
+import Reviews from './Reviews';
 
 interface DetailsProps {
-  description: string;
-  reviews: {
-    id: string;
-    text: string;
-    rating: number;
-    date: Date;
-    user: { name: string };
-  }[];
+  descriptionData: DescriptionComponentType | null;
+  reviews: ReviewComponentType[];
 }
 
-export default function Details({ description, reviews }: DetailsProps) {
+export default function Details({ descriptionData, reviews }: DetailsProps) {
   const [activeTab, setActiveTab] = useState<'description' | 'reviews'>(
     'description'
   );
@@ -45,7 +39,7 @@ export default function Details({ description, reviews }: DetailsProps) {
           </button>
         </div>
         <div className={activeTab === 'description' ? 'block' : 'hidden'}>
-          <Description description={description} />
+          <Description descriptionData={descriptionData} />
         </div>
         <div className={activeTab === 'reviews' ? 'block' : 'hidden'}>
           <Reviews reviews={reviews} />
@@ -55,4 +49,3 @@ export default function Details({ description, reviews }: DetailsProps) {
     </div>
   );
 }
-

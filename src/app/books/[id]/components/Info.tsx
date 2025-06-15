@@ -25,7 +25,7 @@ export default function Info({
   rating,
 }: InfoProps) {
   return (
-    <div className='w-full max-w-[800px] lg:flex-[0_1_500px]'>
+    <div className='self-start w-full max-w-[800px] lg:flex-[0_1_500px]'>
       <div className='flex justify-between mb-3'>
         <h1 className='text-[#2D2D2D] text-[26px] font-bold leading-none '>
           {title}
@@ -54,12 +54,12 @@ export default function Info({
       <div className='bg-[#DDD] h-[1px] w-full my-[30px]' />
       <div className='text-[15px] text-[#414141] leading-[1.7] mb-[42px]'>
         <p>{description}</p>
-        <br />
+        {/* <br />
         <ul className='list-disc pl-5'>
           <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
           <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
           <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
-        </ul>
+        </ul> */}
       </div>
       <div className='flex gap-4 mb-[15px]'>
         <div className='max-w-[128px] w-full grow flex px-6 py-4 items-center justify-between rounded-[104px] border border-[#D7D7D7]'>
