@@ -26,6 +26,13 @@ enum OrderStatus {
   CANCELED
 }
 
+enum BookFormat {
+  HARDCOVER
+  PAPERBACK
+  EBOOK
+  AUDIOBOOK
+}
+
 model Users {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -38,12 +45,20 @@ model Users {
   orders        Orders[]
 }
 
+
 model Books {
   id               String           @id @default(cuid())
   name             String
   author_id        String
   price            Float
   description      String?
+  annotation       String?          
+  language         String?          
+  pages            Int?             
+  format           BookFormat?      
+  isbn             String?          @unique
+  dimensions       String?          
+  weight           Int?             
   publisher        String?
   publication_year Int?
   author           Authors          @relation(fields: [author_id], references: [id])
