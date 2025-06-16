@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import add from '@/../public/add.svg';
-import delivery from '@/../public/delivery.svg';
-import heart from '@/../public/heart.svg';
-import remove from '@/../public/remove.svg';
-import box from '@/../public/rotate-box.svg';
-import star from '@/../public/star.svg';
-import emptyStar from '@/../public/empty-star.svg';
+import {
+  addButton,
+  delivery,
+  emptyStar,
+  heart,
+  removeButton,
+  rotateBox,
+  star,
+} from '@/lib/constants/icons';
 
 interface InfoProps {
   title: string;
@@ -64,11 +66,11 @@ export default function Info({
       <div className='flex gap-4 mb-[15px]'>
         <div className='max-w-[128px] w-full grow flex px-6 py-4 items-center justify-between rounded-[104px] border border-[#D7D7D7]'>
           <button>
-            <Image src={remove} alt='remove book' />
+            <Image src={removeButton} alt='remove book' />
           </button>
           <span>1</span>
           <button>
-            <Image src={add} alt='add book' />
+            <Image src={addButton} alt='add book' />
           </button>
         </div>
 
@@ -86,7 +88,7 @@ export default function Info({
           <p>Free worldwide shipping on all orders over $100</p>
         </div>
         <div className='flex gap-5 items-center'>
-          <Image src={box} alt='delivery box icon' />
+          <Image src={rotateBox} alt='delivery box icon' />
           <p>
             Delivers in: 3-7 Working Days{' '}
             <Link href='/books' className='underline'>

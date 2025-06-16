@@ -11,7 +11,7 @@ const navItems = [
 export default function Header() {
   return (
     <header className='container flex justify-between gap-8 py-10 mx-auto w-full'>
-      <div className='relative w-14 h-6 sm:w-16 sm:h-7'>
+      <Link href='/' className='relative w-14 h-6 sm:w-16 sm:h-7'>
         <Image
           src='/header_icon/logo.svg'
           alt='Company Logo'
@@ -19,7 +19,7 @@ export default function Header() {
           className='object-contain'
           sizes='(max-width: 640px) 56px, 64px'
         />
-      </div>
+      </Link>
       <nav>
         <ul className='flex gap-10'>
           {navItems.map((item) => (
@@ -42,14 +42,14 @@ export default function Header() {
             alt='Dropdown Arrow'
           />
         </Link>
-        <div>
+        <Link href='/cart'>
           <Image
             width={24}
             height={24}
             src='/header_icon/cart.svg'
             alt='cart'
           />
-        </div>
+        </Link>
       </div>
     </header>
   );

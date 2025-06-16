@@ -17,7 +17,7 @@ export default function Details({ descriptionData, reviews }: DetailsProps) {
   );
 
   return (
-    <div className='bg-[#f8f8f8] py-10'>
+    <div className='bg-[#f8f8f8] pt-10 pb-2'>
       <div className='container'>
         <div className='flex items-center justify-center md:justify-start mb-10'>
           <button

@@ -1,7 +1,8 @@
+import Image from 'next/image';
+
 import Sidebar from '@/app/components/Sidebar';
 import Card from '@/components/Card';
 import { db } from '@/lib/db';
-import Image from 'next/image';
 
 export default async function Home() {
   const books = await db.books.findMany({ include: { book_images: true } });

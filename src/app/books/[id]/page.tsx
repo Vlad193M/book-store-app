@@ -1,15 +1,15 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { Suspense } from 'react';
+
+import { arrowRight } from '@/lib/constants/icons';
+import { getBookPageData } from '@/lib/db/books';
+import { extractDescriptionData } from '@/lib/utils/bookDataTransform';
+import ListRecommendedBooksSkeleton from '../../../components/ListRecommendedBooksSkeleton';
+import Details from './components/Details';
 import ImagesSwapper from './components/ImagesSwapper';
 import Info from './components/Info';
 import SimilarBooks from './components/SimilarBooks';
-import SimilarBooksSkeleton from './components/SimilarBooksSkeleton';
-
-import arrowRight from '@/../public/arrow-right.svg';
-import { getBookPageData } from '@/lib/db/books';
-import Image from 'next/image';
-import Link from 'next/link';
-import Details from './components/Details';
-import { extractDescriptionData } from '@/lib/utils/bookDataTransform';
 
 export default async function Page({
   params,
@@ -65,9 +65,14 @@ export default async function Page({
         reviews={book.reviews}
       />
 
-      <Suspense fallback={<SimilarBooksSkeleton />}>
-        <SimilarBooks bookId={book.id} />
-      </Suspense>
+      <section className='container mt-10 md:mt-16'>
+        <h2 className='text-[#3D3D3D] text-4xl font-bold leading-[45px] mb-9 text-center md:text-start'>
+          Similar books
+        </h2>
+        <Suspense fallback={<ListRecommendedBooksSkeleton count={4} />}>
+          <SimilarBooks bookId={book.id} />
+        </Suspense>
+      </section>
     </div>
   );
 }

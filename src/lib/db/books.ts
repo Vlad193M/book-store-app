@@ -18,7 +18,7 @@ export async function getBookPageData(bookId: string) {
       },
       author: true,
       book_categories: {
-        include: { category: true},
+        include: { category: true },
       },
       inventories: true,
     },
@@ -27,42 +27,64 @@ export async function getBookPageData(bookId: string) {
   return book;
 }
 
-interface SimilarBooksParams {
-  bookId: string;
+type getBooksBySimilarCategoriesBaseParams = {
   take?: number;
   order?: 'asc' | 'desc';
-}
+};
 
-export async function getSimilarBooks({
+type getBooksBySimilarCategoriesParams =
+  | ({
+      bookId: string;
+      bookIds?: never;
+    } & getBooksBySimilarCategoriesBaseParams)
+  | ({
+      bookId?: never;
+      bookIds: string[];
+    } & getBooksBySimilarCategoriesBaseParams);
+
+export async function getBooksBySimilarCategories({
   bookId,
-  take,
-  order,
-}: SimilarBooksParams) {
+  bookIds,
+  take = 4,
+  order = 'desc',
+}: getBooksBySimilarCategoriesParams) {
+  const targetIds = bookIds ?? (bookId ? [bookId] : []);
+
+  if (targetIds.length === 0) return [];
+
   const bookCategories = await db.bookCategories.findMany({
     include: { category: true },
-    where: { book_id: bookId },
+    where: { book_id: { in: targetIds } },
   });
 
-  const arrayCategoryId = bookCategories.map(
-    (category) => category.category_id
-  );
+  if (bookCategories.length === 0) return [];
+
+  const arrayCategoryId = [
+    ...new Set(bookCategories.map((c) => c.category_id)),
+  ];
 
   const similarBooks = await db.books.findMany({
-    include: { book_categories: true, inventories: true, book_images: true },
+    include: {
+      book_categories: true,
+      inventories: true,
+      book_images: true,
+    },
     where: {
       book_categories: {
         some: {
           category_id: { in: arrayCategoryId },
-          AND: { book_id: { not: bookId } },
         },
+      },
+      id: {
+        notIn: targetIds,
       },
     },
     orderBy: {
       inventories: {
-        quantity: order || 'desc',
+        quantity: order,
       },
     },
-    take: take || 4,
+    take,
   });
 
   return similarBooks;

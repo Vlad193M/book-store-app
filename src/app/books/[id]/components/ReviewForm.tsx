@@ -4,9 +4,8 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import emptyStar from '@/../public/empty-star.svg';
-import star from '@/../public/star.svg';
-import rightArrow from '@/../public/white-right-arrow.svg';
+import { star, whiteRightArrow, emptyStar  } from '@/lib/constants/icons';
+
 import { addReview } from '@/lib/actions/addReview';
 
 export default function ReviewForm() {
@@ -63,7 +62,10 @@ export default function ReviewForm() {
       {Object.keys(validationErrors).length > 0 && (
         <div className='mb-1.5'>
           {Object.values(validationErrors).map((errorText) => (
-            <p key={errorText} className='text-red-400 font-bold text-[12px] sm:text-[16px]'>
+            <p
+              key={errorText}
+              className='text-red-400 font-bold text-[12px] sm:text-[16px]'
+            >
               {errorText}
             </p>
           ))}
@@ -97,7 +99,7 @@ export default function ReviewForm() {
         </div>
         <button className='bg-black rounded-[64px] gap-2.5 flex justify-between py-2.5 px-6 max-w-44 self-end'>
           <p className='text-white '>Post Review</p>
-          <Image src={rightArrow} alt='right arrow' />
+          <Image src={whiteRightArrow} alt='right arrow' />
         </button>
       </div>
     </form>

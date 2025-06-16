@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
-import emptyStar from '@/../public/empty-star.svg';
-import star from '@/../public/star.svg';
+import { emptyStar, star } from '@/lib/constants/icons';
 import { ReviewComponentType } from '@/types/book';
 
 interface ReviewsProps {
