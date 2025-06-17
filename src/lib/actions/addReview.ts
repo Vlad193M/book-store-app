@@ -24,16 +24,16 @@ export async function addReview(data: {
 
     const userId = tokenPayload.id as string;
 
-    const user = await db.users.findUnique({ where: { id: userId } });
+    const user = await db.user.findUnique({ where: { id: userId } });
 
     if (!user) {
       throw new Error('User don not exist');
     }
 
-    const newReview = await db.reviews.create({
+    const newReview = await db.review.create({
       data: {
-        user_id: user.id,
-        book_id: data.bookId,
+        userId: user.id,
+        bookId: data.bookId,
         text: data.review,
         rating: data.rating,
       },
