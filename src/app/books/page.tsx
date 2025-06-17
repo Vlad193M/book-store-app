@@ -5,8 +5,8 @@ import Card from '@/components/Card';
 import { db } from '@/lib/db';
 
 export default async function Home() {
-  const books = await db.books.findMany({ include: { book_images: true } });
-  const categories = await db.categories.findMany();
+  const books = await db.book.findMany({ include: { bookImages: true } });
+  const categories = await db.category.findMany();
 
   console.log(categories);
   return (
@@ -41,7 +41,7 @@ export default async function Home() {
               price={book.price}
               title={book.name}
               src={
-                book.book_images.find((img) => img.is_primary)?.image_url ?? ''
+                book.bookImages.find((img) => img.isPrimary)?.imageUrl ?? ''
               }
             />
           ))}

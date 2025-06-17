@@ -26,10 +26,10 @@ export default function Description({ descriptionData }: DescriptionProps) {
             value={descriptionData.publisher}
           />
         )}
-        {!!descriptionData?.publication_year && (
+        {!!descriptionData?.publicationYear && (
           <CharacteristicItem
             clef='Publication year'
-            value={String(descriptionData.publication_year)}
+            value={String(descriptionData.publicationYear)}
           />
         )}
         {!!descriptionData?.language && (
@@ -47,10 +47,10 @@ export default function Description({ descriptionData }: DescriptionProps) {
             }
           />
         )}
-        {!!descriptionData?.book_categories[0].category.name && (
+        {!!descriptionData?.bookCategories[0].category.name && (
           <CharacteristicItem
             clef='Category'
-            value={descriptionData.book_categories[0].category.name}
+            value={descriptionData.bookCategories[0].category.name}
           />
         )}
         {!!descriptionData?.isbn && (

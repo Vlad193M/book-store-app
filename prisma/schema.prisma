@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -33,129 +27,151 @@ enum BookFormat {
   AUDIOBOOK
 }
 
-model Users {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String
-  password_hash String
-  role          Role      @default(USER)
-  created_at    DateTime  @default(now())
-  carts         Carts[]
-  reviews       Reviews[]
-  orders        Orders[]
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String   @map("password_hash")
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now()) @map("created_at")
+  cart         Cart?
+  reviews      Review[]
+  orders       Order[]
+
+  @@map("users")
 }
 
+model Book {
+  id              String         @id @default(cuid())
+  name            String
+  authorId        String         @map("author_id")
+  price           Float
+  description     String?
+  annotation      String?
+  language        String?
+  pages           Int?
+  format          BookFormat?
+  isbn            String?        @unique
+  dimensions      String?
+  weight          Int?
+  publisher       String?
+  publicationYear Int?           @map("publication_year")
+  author          Author         @relation(fields: [authorId], references: [id])
+  bookCategories  BookCategory[]
+  bookImages      BookImage[]
+  inventory       Inventory?
+  reviews         Review[]
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
 
-model Books {
-  id               String           @id @default(cuid())
-  name             String
-  author_id        String
-  price            Float
-  description      String?
-  annotation       String?          
-  language         String?          
-  pages            Int?             
-  format           BookFormat?      
-  isbn             String?          @unique
-  dimensions       String?          
-  weight           Int?             
-  publisher        String?
-  publication_year Int?
-  author           Authors          @relation(fields: [author_id], references: [id])
-  book_categories  BookCategories[]
-  book_images      BookImages[]
-  inventories      Inventories?
-  reviews          Reviews[]
-  cart_items       CartItems[]
-  order_items      OrderItems[]
+  @@map("books")
 }
 
-model Authors {
+model Author {
   id          String  @id @default(cuid())
   name        String
   description String?
-  books       Books[]
+  books       Book[]
+
+  @@map("authors")
 }
 
-model Categories {
-  id              String           @id @default(cuid())
-  name            String
-  parent_id       String?
-  description     String?
-  parent          Categories?      @relation("CategoryHierarchy", fields: [parent_id], references: [id])
-  children        Categories[]     @relation("CategoryHierarchy")
-  book_categories BookCategories[]
+model Category {
+  id             String         @id @default(cuid())
+  name           String
+  parentId       String?        @map("parent_id")
+  description    String?
+  parent         Category?      @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children       Category[]     @relation("CategoryHierarchy")
+  bookCategories BookCategory[]
+
+  @@map("categories")
 }
 
-model BookCategories {
-  book_id     String     
-  category_id String     
-  book        Books      @relation(fields: [book_id], references: [id])
-  category    Categories @relation(fields: [category_id], references: [id])
+model BookCategory {
+  bookId     String   @map("book_id")
+  categoryId String   @map("category_id")
+  book       Book     @relation(fields: [bookId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
 
-  @@id([book_id, category_id])
+  @@id([bookId, categoryId])
+  @@map("book_categories")
 }
 
-model BookImages {
-  id         String  @id @default(cuid())
-  book_id    String
-  image_url  String
-  is_primary Boolean @default(false)
-  book       Books   @relation(fields: [book_id], references: [id])
+model BookImage {
+  id        String  @id @default(cuid())
+  bookId    String  @map("book_id")
+  imageUrl  String  @map("image_url")
+  isPrimary Boolean @default(false) @map("is_primary")
+  book      Book    @relation(fields: [bookId], references: [id])
+
+  @@map("book_images")
 }
 
-model Inventories {
+model Inventory {
   id       String @id @default(cuid())
-  book_id  String @unique
+  bookId   String @unique @map("book_id")
   quantity Int
-  book     Books  @relation(fields: [book_id], references: [id])
+  book     Book   @relation(fields: [bookId], references: [id])
+
+  @@map("inventories")
 }
 
-model Carts {
-  id         String      @id @default(cuid())
-  user_id    String
-  date       DateTime    @default(now())
-  user       Users       @relation(fields: [user_id], references: [id])
-  cart_items CartItems[]
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique @map("user_id")
+  date      DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id])
+  cartItems CartItem[]
+
+  @@map("carts")
 }
 
-model CartItems {
+model CartItem {
   id       String @id @default(cuid())
-  cart_id  String
-  book_id  String
+  cartId   String @map("cart_id")
+  bookId   String @map("book_id")
   quantity Int
-  cart     Carts  @relation(fields: [cart_id], references: [id])
-  book     Books  @relation(fields: [book_id], references: [id])
+  cart     Cart   @relation(fields: [cartId], references: [id])
+  book     Book   @relation(fields: [bookId], references: [id])
+
+  @@map("cart_items")
 }
 
-model Reviews {
-  id      String   @id @default(cuid())
-  user_id String
-  book_id String
-  text    String
-  rating  Int
-  date    DateTime @default(now())
-  user    Users    @relation(fields: [user_id], references: [id])
-  book    Books    @relation(fields: [book_id], references: [id])
+model Review {
+  id     String   @id @default(cuid())
+  userId String   @map("user_id")
+  bookId String   @map("book_id")
+  text   String
+  rating Int
+  date   DateTime @default(now())
+  user   User     @relation(fields: [userId], references: [id])
+  book   Book     @relation(fields: [bookId], references: [id])
+
+  @@map("reviews")
 }
 
-model Orders {
-  id               String       @id @default(cuid())
-  user_id          String
-  total_price      Float
-  shipping_address String
-  payment_method   String
-  date             DateTime     @default(now())
-  status           OrderStatus  @default(PENDING)
-  user             Users        @relation(fields: [user_id], references: [id])
-  order_items      OrderItems[]
+model Order {
+  id              String      @id @default(cuid())
+  userId          String      @map("user_id")
+  totalPrice      Float       @map("total_price")
+  shippingAddress String      @map("shipping_address")
+  paymentMethod   String      @map("payment_method")
+  date            DateTime    @default(now())
+  status          OrderStatus @default(PENDING)
+  user            User        @relation(fields: [userId], references: [id])
+  orderItems      OrderItem[]
+
+  @@map("orders")
 }
 
-model OrderItems {
+model OrderItem {
   id       String @id @default(cuid())
-  order_id String
-  book_id  String
+  orderId  String @map("order_id")
+  bookId   String @map("book_id")
   quantity Int
-  order    Orders @relation(fields: [order_id], references: [id])
-  book     Books  @relation(fields: [book_id], references: [id])
+  order    Order  @relation(fields: [orderId], references: [id])
+  book     Book   @relation(fields: [bookId], references: [id])
+
+  @@map("order_items")
 }

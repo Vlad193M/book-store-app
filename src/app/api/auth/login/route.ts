@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const user = await db.users.findUnique({
+    const user = await db.user.findUnique({
       where: {
         email,
       },
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     if (!user)
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
 
-    const passwordIsValid = await bcrypt.compare(password, user.password_hash);
+    const passwordIsValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!passwordIsValid)
       return NextResponse.json(

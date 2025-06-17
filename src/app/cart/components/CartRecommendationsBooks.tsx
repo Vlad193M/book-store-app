@@ -22,7 +22,7 @@ export default async function CartRecommendationsBooks({
           id={book.id}
           price={book.price}
           title={book.name}
-          src={book.book_images.find((img) => img.is_primary)?.image_url ?? ''}
+          src={book.bookImages.find((img) => img.isPrimary)?.imageUrl ?? ''}
         />
       ))}
     </div>

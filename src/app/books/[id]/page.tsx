@@ -49,7 +49,7 @@ export default async function Page({
       </div>
 
       <section className='container mb-10 flex flex-col lg:flex-row lg:gap-5 md:gap-14 gap-5 justify-between items-center'>
-        <ImagesSwapper bookImages={book.book_images} bookName={book.name} />
+        <ImagesSwapper bookImages={book.bookImages} bookName={book.name} />
         <Info
           title={book.name}
           price={book.price}

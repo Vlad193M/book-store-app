@@ -6,43 +6,43 @@ async function main() {
   await prisma.$transaction(async (prisma) => {
     // Create Users
     const users = await Promise.all([
-      prisma.users.create({
+      prisma.user.create({
         data: {
           email: 'test1@gmail.com',
           name: 'Vlad Smith',
-          password_hash: 'hashed_password_1',
+          passwordHash: 'hashed_password_1',
           role: 'USER',
         },
       }),
-      prisma.users.create({
+      prisma.user.create({
         data: {
           email: 'admin@gmail.com',
           name: 'Admin Jane',
-          password_hash: 'hashed_password_2',
+          passwordHash: 'hashed_password_2',
           role: 'ADMIN',
         },
       }),
-      prisma.users.create({
+      prisma.user.create({
         data: {
           email: 'test2@gmail.com',
           name: 'Alice Johnson',
-          password_hash: 'hashed_password_3',
+          passwordHash: 'hashed_password_3',
           role: 'USER',
         },
       }),
-      prisma.users.create({
+      prisma.user.create({
         data: {
           email: 'test3@gmail.com',
           name: 'Bob Wilson',
-          password_hash: 'hashed_password_4',
+          passwordHash: 'hashed_password_4',
           role: 'USER',
         },
       }),
-      prisma.users.create({
+      prisma.user.create({
         data: {
           email: 'test4@gmail.com',
           name: 'Emma Davis',
-          password_hash: 'hashed_password_5',
+          passwordHash: 'hashed_password_5',
           role: 'USER',
         },
       }),
@@ -50,63 +50,63 @@ async function main() {
 
     // Create Authors
     const authors = await Promise.all([
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'J.K. Rowling',
           description:
             'British author, best known for the Harry Potter series.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'George R.R. Martin',
           description: 'American novelist, known for A Song of Ice and Fire.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'J.R.R. Tolkien',
           description: 'Author of The Lord of the Rings and The Hobbit.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Agatha Christie',
           description: 'Queen of mystery novels, creator of Hercule Poirot.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Stephen King',
           description: 'Master of horror and suspense fiction.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Jane Austen',
           description: 'English novelist known for her romance novels.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Neil Gaiman',
           description: 'British author of fantasy and speculative fiction.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Toni Morrison',
           description:
             'American novelist, known for her profound works on race and identity.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Haruki Murakami',
           description: 'Japanese author of surreal and philosophical novels.',
         },
       }),
-      prisma.authors.create({
+      prisma.author.create({
         data: {
           name: 'Margaret Atwood',
           description:
@@ -117,28 +117,28 @@ async function main() {
 
     // Create Categories
     const categories = await Promise.all([
-      prisma.categories.create({
+      prisma.category.create({
         data: { name: 'Fiction', description: 'Fictional literature' },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: { name: 'Fantasy', description: 'Fantasy genre books' },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: { name: 'Mystery', description: 'Mystery and crime novels' },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: { name: 'Horror', description: 'Horror genre books' },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: { name: 'Romance', description: 'Romantic literature' },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: {
           name: 'Literary Fiction',
           description: 'Character-driven narrative fiction',
         },
       }),
-      prisma.categories.create({
+      prisma.category.create({
         data: {
           name: 'Dystopian',
           description: 'Dystopian and speculative fiction',
@@ -148,38 +148,38 @@ async function main() {
 
     // Update child categories
     await Promise.all([
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[1].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[2].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[3].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[4].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[5].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
-      prisma.categories.update({
+      prisma.category.update({
         where: { id: categories[6].id },
-        data: { parent_id: categories[0].id },
+        data: { parentId: categories[0].id },
       }),
     ]);
 
-    // Create Books (30 books)
+    // Create Books
     const books = await Promise.all([
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: "Harry Potter and the Philosopher's Stone",
-          author_id: authors[0].id,
+          authorId: authors[0].id,
           price: 19.99,
           description:
             'The first book in the Harry Potter series, introducing the magical world of Hogwarts.',
@@ -192,13 +192,13 @@ async function main() {
           dimensions: '129 x 198 mm',
           weight: 350,
           publisher: 'Bloomsbury',
-          publication_year: 1997,
+          publicationYear: 1997,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'A Game of Thrones',
-          author_id: authors[1].id,
+          authorId: authors[1].id,
           price: 24.99,
           description:
             'The first book in A Song of Ice and Fire series, a sprawling epic fantasy.',
@@ -211,13 +211,13 @@ async function main() {
           dimensions: '108 x 174 mm',
           weight: 450,
           publisher: 'Bantam Books',
-          publication_year: 1996,
+          publicationYear: 1996,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Hobbit',
-          author_id: authors[2].id,
+          authorId: authors[2].id,
           price: 15.99,
           description:
             'A fantasy adventure by J.R.R. Tolkien, set in Middle-earth.',
@@ -230,13 +230,13 @@ async function main() {
           dimensions: '129 x 198 mm',
           weight: 300,
           publisher: 'Houghton Mifflin',
-          publication_year: 1937,
+          publicationYear: 1937,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Murder on the Orient Express',
-          author_id: authors[3].id,
+          authorId: authors[3].id,
           price: 12.99,
           description: 'A classic Hercule Poirot mystery by Agatha Christie.',
           annotation:
@@ -248,13 +248,13 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 200,
           publisher: 'HarperCollins',
-          publication_year: 1934,
+          publicationYear: 1934,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Shining',
-          author_id: authors[4].id,
+          authorId: authors[4].id,
           price: 17.99,
           description: 'A horror novel about a haunted hotel by Stephen King.',
           annotation:
@@ -266,13 +266,13 @@ async function main() {
           dimensions: '106 x 175 mm',
           weight: 400,
           publisher: 'Anchor Books',
-          publication_year: 1977,
+          publicationYear: 1977,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Harry Potter and the Chamber of Secrets',
-          author_id: authors[0].id,
+          authorId: authors[0].id,
           price: 20.99,
           description: 'The second book in the Harry Potter series.',
           annotation:
@@ -284,13 +284,13 @@ async function main() {
           dimensions: '137 x 205 mm',
           weight: 360,
           publisher: 'Scholastic',
-          publication_year: 1998,
+          publicationYear: 1998,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'A Clash of Kings',
-          author_id: authors[1].id,
+          authorId: authors[1].id,
           price: 25.99,
           description: 'The second book in A Song of Ice and Fire series.',
           annotation:
@@ -302,13 +302,13 @@ async function main() {
           dimensions: '108 x 174 mm',
           weight: 470,
           publisher: 'Bantam Books',
-          publication_year: 1998,
+          publicationYear: 1998,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Lord of the Rings: The Fellowship of the Ring',
-          author_id: authors[2].id,
+          authorId: authors[2].id,
           price: 18.99,
           description: 'The first part of The Lord of the Rings trilogy.',
           annotation:
@@ -320,13 +320,13 @@ async function main() {
           dimensions: '130 x 198 mm',
           weight: 350,
           publisher: 'Mariner Books',
-          publication_year: 1954,
+          publicationYear: 1954,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'And Then There Were None',
-          author_id: authors[3].id,
+          authorId: authors[3].id,
           price: 13.99,
           description: 'A gripping mystery about ten strangers on an island.',
           annotation:
@@ -338,13 +338,13 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 210,
           publisher: 'HarperCollins',
-          publication_year: 1939,
+          publicationYear: 1939,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'It',
-          author_id: authors[4].id,
+          authorId: authors[4].id,
           price: 22.99,
           description: 'A horror novel about a shape-shifting entity.',
           annotation:
@@ -356,13 +356,13 @@ async function main() {
           dimensions: '135 x 210 mm',
           weight: 700,
           publisher: 'Scribner',
-          publication_year: 1986,
+          publicationYear: 1986,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Pride and Prejudice',
-          author_id: authors[5].id,
+          authorId: authors[5].id,
           price: 14.99,
           description: 'A classic romance novel by Jane Austen.',
           annotation:
@@ -374,13 +374,13 @@ async function main() {
           dimensions: '129 x 198 mm',
           weight: 320,
           publisher: 'Penguin Classics',
-          publication_year: 1813,
+          publicationYear: 1813,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Sense and Sensibility',
-          author_id: authors[5].id,
+          authorId: authors[5].id,
           price: 13.99,
           description: 'A novel about two sisters navigating love and loss.',
           annotation:
@@ -392,13 +392,13 @@ async function main() {
           dimensions: '129 x 198 mm',
           weight: 310,
           publisher: 'Penguin Classics',
-          publication_year: 1811,
+          publicationYear: 1811,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Harry Potter and the Prisoner of Azkaban',
-          author_id: authors[0].id,
+          authorId: authors[0].id,
           price: 21.99,
           description: 'The third book in the Harry Potter series.',
           annotation:
@@ -410,13 +410,13 @@ async function main() {
           dimensions: '137 x 205 mm',
           weight: 370,
           publisher: 'Scholastic',
-          publication_year: 1999,
+          publicationYear: 1999,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Silmarillion',
-          author_id: authors[2].id,
+          authorId: authors[2].id,
           price: 19.99,
           description: 'A collection of mythopoeic stories by J.R.R. Tolkien.',
           annotation:
@@ -428,13 +428,13 @@ async function main() {
           dimensions: '130 x 198 mm',
           weight: 340,
           publisher: 'Mariner Books',
-          publication_year: 1977,
+          publicationYear: 1977,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Carrie',
-          author_id: authors[4].id,
+          authorId: authors[4].id,
           price: 16.99,
           description: 'A horror novel about a telekinetic teenager.',
           annotation:
@@ -446,13 +446,13 @@ async function main() {
           dimensions: '106 x 175 mm',
           weight: 250,
           publisher: 'Anchor Books',
-          publication_year: 1974,
+          publicationYear: 1974,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'American Gods',
-          author_id: authors[6].id,
+          authorId: authors[6].id,
           price: 18.99,
           description: 'A fantasy novel blending mythology and modern America.',
           annotation:
@@ -464,13 +464,13 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 450,
           publisher: 'William Morrow',
-          publication_year: 2001,
+          publicationYear: 2001,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Beloved',
-          author_id: authors[7].id,
+          authorId: authors[7].id,
           price: 16.99,
           description: 'A powerful novel about slavery and its aftermath.',
           annotation:
@@ -482,13 +482,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 300,
           publisher: 'Vintage',
-          publication_year: 1987,
+          publicationYear: 1987,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Norwegian Wood',
-          author_id: authors[8].id,
+          authorId: authors[8].id,
           price: 15.99,
           description: 'A nostalgic novel of love and loss by Haruki Murakami.',
           annotation:
@@ -500,13 +500,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 280,
           publisher: 'Vintage',
-          publication_year: 1987,
+          publicationYear: 1987,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Handmaid’s Tale',
-          author_id: authors[9].id,
+          authorId: authors[9].id,
           price: 15.99,
           description: 'A dystopian novel about a totalitarian regime.',
           annotation:
@@ -518,13 +518,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 290,
           publisher: 'Anchor Books',
-          publication_year: 1985,
+          publicationYear: 1985,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Harry Potter and the Goblet of Fire',
-          author_id: authors[0].id,
+          authorId: authors[0].id,
           price: 22.99,
           description: 'The fourth book in the Harry Potter series.',
           annotation:
@@ -536,13 +536,13 @@ async function main() {
           dimensions: '137 x 205 mm',
           weight: 600,
           publisher: 'Scholastic',
-          publication_year: 2000,
+          publicationYear: 2000,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'A Storm of Swords',
-          author_id: authors[1].id,
+          authorId: authors[1].id,
           price: 26.99,
           description: 'The third book in A Song of Ice and Fire series.',
           annotation:
@@ -554,13 +554,13 @@ async function main() {
           dimensions: '108 x 174 mm',
           weight: 600,
           publisher: 'Bantam Books',
-          publication_year: 2000,
+          publicationYear: 2000,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'The Lord of the Rings: The Two Towers',
-          author_id: authors[2].id,
+          authorId: authors[2].id,
           price: 18.99,
           description: 'The second part of The Lord of the Rings trilogy.',
           annotation:
@@ -572,13 +572,13 @@ async function main() {
           dimensions: '130 x 198 mm',
           weight: 340,
           publisher: 'Mariner Books',
-          publication_year: 1954,
+          publicationYear: 1954,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Death on the Nile',
-          author_id: authors[3].id,
+          authorId: authors[3].id,
           price: 13.99,
           description: 'A Hercule Poirot mystery set on a Nile River cruise.',
           annotation:
@@ -590,13 +590,13 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 240,
           publisher: 'HarperCollins',
-          publication_year: 1937,
+          publicationYear: 1937,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Salem’s Lot',
-          author_id: authors[4].id,
+          authorId: authors[4].id,
           price: 17.99,
           description: 'A horror novel about a vampire infestation.',
           annotation:
@@ -608,13 +608,13 @@ async function main() {
           dimensions: '106 x 175 mm',
           weight: 400,
           publisher: 'Anchor Books',
-          publication_year: 1975,
+          publicationYear: 1975,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Emma',
-          author_id: authors[5].id,
+          authorId: authors[5].id,
           price: 14.99,
           description:
             'A Jane Austen novel about a wealthy young woman’s matchmaking.',
@@ -627,13 +627,13 @@ async function main() {
           dimensions: '129 x 198 mm',
           weight: 330,
           publisher: 'Penguin Classics',
-          publication_year: 1815,
+          publicationYear: 1815,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Good Omens',
-          author_id: authors[6].id,
+          authorId: authors[6].id,
           price: 17.99,
           description:
             'A comedic fantasy novel by Neil Gaiman and Terry Pratchett.',
@@ -646,13 +646,13 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 350,
           publisher: 'William Morrow',
-          publication_year: 1990,
+          publicationYear: 1990,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Song of Solomon',
-          author_id: authors[7].id,
+          authorId: authors[7].id,
           price: 16.99,
           description: 'A novel about identity and heritage by Toni Morrison.',
           annotation:
@@ -664,13 +664,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 310,
           publisher: 'Vintage',
-          publication_year: 1977,
+          publicationYear: 1977,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Kafka on the Shore',
-          author_id: authors[8].id,
+          authorId: authors[8].id,
           price: 16.99,
           description: 'A surreal novel by Haruki Murakami.',
           annotation:
@@ -682,13 +682,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 360,
           publisher: 'Vintage',
-          publication_year: 2002,
+          publicationYear: 2002,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Oryx and Crake',
-          author_id: authors[9].id,
+          authorId: authors[9].id,
           price: 16.99,
           description: 'A dystopian novel by Margaret Atwood.',
           annotation:
@@ -700,13 +700,13 @@ async function main() {
           dimensions: '132 x 203 mm',
           weight: 340,
           publisher: 'Anchor Books',
-          publication_year: 2003,
+          publicationYear: 2003,
         },
       }),
-      prisma.books.create({
+      prisma.book.create({
         data: {
           name: 'Neverwhere',
-          author_id: authors[6].id,
+          authorId: authors[6].id,
           price: 16.99,
           description: 'A dark fantasy novel set in London Below.',
           annotation:
@@ -718,738 +718,737 @@ async function main() {
           dimensions: '135 x 203 mm',
           weight: 330,
           publisher: 'William Morrow',
-          publication_year: 1996,
+          publicationYear: 1996,
         },
       }),
     ]);
 
     // Create BookCategories
     await Promise.all([
-      prisma.bookCategories.create({
-        data: { book_id: books[0].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[0].id, categoryId: categories[1].id },
       }), // Harry Potter 1 - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[1].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[1].id, categoryId: categories[1].id },
       }), // A Game of Thrones - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[2].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[2].id, categoryId: categories[1].id },
       }), // The Hobbit - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[3].id, category_id: categories[2].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[3].id, categoryId: categories[2].id },
       }), // Murder on the Orient Express - Mystery
-      prisma.bookCategories.create({
-        data: { book_id: books[4].id, category_id: categories[3].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[4].id, categoryId: categories[3].id },
       }), // The Shining - Horror
-      prisma.bookCategories.create({
-        data: { book_id: books[5].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[5].id, categoryId: categories[1].id },
       }), // Harry Potter 2 - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[6].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[6].id, categoryId: categories[1].id },
       }), // A Clash of Kings - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[7].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[7].id, categoryId: categories[1].id },
       }), // The Fellowship of the Ring - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[8].id, category_id: categories[2].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[8].id, categoryId: categories[2].id },
       }), // And Then There Were None - Mystery
-      prisma.bookCategories.create({
-        data: { book_id: books[9].id, category_id: categories[3].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[9].id, categoryId: categories[3].id },
       }), // It - Horror
-      prisma.bookCategories.create({
-        data: { book_id: books[10].id, category_id: categories[4].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[10].id, categoryId: categories[4].id },
       }), // Pride and Prejudice - Romance
-      prisma.bookCategories.create({
-        data: { book_id: books[11].id, category_id: categories[4].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[11].id, categoryId: categories[4].id },
       }), // Sense and Sensibility - Romance
-      prisma.bookCategories.create({
-        data: { book_id: books[12].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[12].id, categoryId: categories[1].id },
       }), // Harry Potter 3 - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[13].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[13].id, categoryId: categories[1].id },
       }), // The Silmarillion - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[14].id, category_id: categories[3].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[14].id, categoryId: categories[3].id },
       }), // Carrie - Horror
-      prisma.bookCategories.create({
-        data: { book_id: books[15].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[15].id, categoryId: categories[1].id },
       }), // American Gods - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[16].id, category_id: categories[5].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[16].id, categoryId: categories[5].id },
       }), // Beloved - Literary Fiction
-      prisma.bookCategories.create({
-        data: { book_id: books[17].id, category_id: categories[5].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[17].id, categoryId: categories[5].id },
       }), // Norwegian Wood - Literary Fiction
-      prisma.bookCategories.create({
-        data: { book_id: books[18].id, category_id: categories[6].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[18].id, categoryId: categories[6].id },
       }), // The Handmaid’s Tale - Dystopian
-      prisma.bookCategories.create({
-        data: { book_id: books[19].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[19].id, categoryId: categories[1].id },
       }), // Harry Potter 4 - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[20].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[20].id, categoryId: categories[1].id },
       }), // A Storm of Swords - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[21].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[21].id, categoryId: categories[1].id },
       }), // The Two Towers - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[22].id, category_id: categories[2].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[22].id, categoryId: categories[2].id },
       }), // Death on the Nile - Mystery
-      prisma.bookCategories.create({
-        data: { book_id: books[23].id, category_id: categories[3].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[23].id, categoryId: categories[3].id },
       }), // Salem’s Lot - Horror
-      prisma.bookCategories.create({
-        data: { book_id: books[24].id, category_id: categories[4].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[24].id, categoryId: categories[4].id },
       }), // Emma - Romance
-      prisma.bookCategories.create({
-        data: { book_id: books[25].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[25].id, categoryId: categories[1].id },
       }), // Good Omens - Fantasy
-      prisma.bookCategories.create({
-        data: { book_id: books[26].id, category_id: categories[5].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[26].id, categoryId: categories[5].id },
       }), // Song of Solomon - Literary Fiction
-      prisma.bookCategories.create({
-        data: { book_id: books[27].id, category_id: categories[5].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[27].id, categoryId: categories[5].id },
       }), // Kafka on the Shore - Literary Fiction
-      prisma.bookCategories.create({
-        data: { book_id: books[28].id, category_id: categories[6].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[28].id, categoryId: categories[6].id },
       }), // Oryx and Crake - Dystopian
-      prisma.bookCategories.create({
-        data: { book_id: books[29].id, category_id: categories[1].id },
+      prisma.bookCategory.create({
+        data: { bookId: books[29].id, categoryId: categories[1].id },
       }), // Neverwhere - Fantasy
     ]);
 
     // Create BookImages
     await Promise.all([
-      // Original books (keeping existing image paths where specified)
-      // Harry Potter and the Philosopher's Stone (3 images, using original paths)
-      prisma.bookImages.create({
+      // Harry Potter and the Philosopher's Stone
+      prisma.bookImage.create({
         data: {
-          book_id: books[0].id,
-          image_url: '/books/book_1.jpg',
-          is_primary: true,
+          bookId: books[0].id,
+          imageUrl: '/books/book_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[0].id,
-          image_url: '/books/book_1_1.png',
-          is_primary: false,
+          bookId: books[0].id,
+          imageUrl: '/books/book_1_1.png',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[0].id,
-          image_url: '/books/book_1_2.png',
-          is_primary: false,
+          bookId: books[0].id,
+          imageUrl: '/books/book_1_2.png',
+          isPrimary: false,
         },
       }),
-      // A Game of Thrones (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // A Game of Thrones
+      prisma.bookImage.create({
         data: {
-          book_id: books[1].id,
-          image_url: '/books/game_of_thrones_1.jpg',
-          is_primary: true,
+          bookId: books[1].id,
+          imageUrl: '/books/game_of_thrones_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[1].id,
-          image_url: '/books/game_of_thrones_2.jpg',
-          is_primary: false,
+          bookId: books[1].id,
+          imageUrl: '/books/game_of_thrones_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[1].id,
-          image_url: '/books/game_of_thrones_3.jpg',
-          is_primary: false,
+          bookId: books[1].id,
+          imageUrl: '/books/game_of_thrones_3.jpg',
+          isPrimary: false,
         },
       }),
-      // The Hobbit (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // The Hobbit
+      prisma.bookImage.create({
         data: {
-          book_id: books[2].id,
-          image_url: '/books/hobbit_1.jpg',
-          is_primary: true,
+          bookId: books[2].id,
+          imageUrl: '/books/hobbit_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[2].id,
-          image_url: '/books/hobbit_2.jpg',
-          is_primary: false,
+          bookId: books[2].id,
+          imageUrl: '/books/hobbit_2.jpg',
+          isPrimary: false,
         },
       }),
-      // Murder on the Orient Express (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // Murder on the Orient Express
+      prisma.bookImage.create({
         data: {
-          book_id: books[3].id,
-          image_url: '/books/orient_express_1.jpg',
-          is_primary: true,
+          bookId: books[3].id,
+          imageUrl: '/books/orient_express_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[3].id,
-          image_url: '/books/orient_express_2.webp',
-          is_primary: false,
+          bookId: books[3].id,
+          imageUrl: '/books/orient_express_2.webp',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[3].id,
-          image_url: '/books/orient_express_3.webp',
-          is_primary: false,
+          bookId: books[3].id,
+          imageUrl: '/books/orient_express_3.webp',
+          isPrimary: false,
         },
       }),
-      // The Shining (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // The Shining
+      prisma.bookImage.create({
         data: {
-          book_id: books[4].id,
-          image_url: '/books/shining_1.jpg',
-          is_primary: true,
+          bookId: books[4].id,
+          imageUrl: '/books/shining_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[4].id,
-          image_url: '/books/shining_2.png',
-          is_primary: false,
+          bookId: books[4].id,
+          imageUrl: '/books/shining_2.png',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[4].id,
-          image_url: '/books/shining_3.png',
-          is_primary: false,
+          bookId: books[4].id,
+          imageUrl: '/books/shining_3.png',
+          isPrimary: false,
         },
       }),
-      // Harry Potter and the Chamber of Secrets (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // Harry Potter and the Chamber of Secrets
+      prisma.bookImage.create({
         data: {
-          book_id: books[5].id,
-          image_url: '/books/hp_chamber_secrets_1.jpg',
-          is_primary: true,
+          bookId: books[5].id,
+          imageUrl: '/books/hp_chamber_secrets_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[5].id,
-          image_url: '/books/hp_chamber_secrets_2.jpg',
-          is_primary: false,
+          bookId: books[5].id,
+          imageUrl: '/books/hp_chamber_secrets_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[5].id,
-          image_url: '/books/hp_chamber_secrets_3.jpg',
-          is_primary: false,
+          bookId: books[5].id,
+          imageUrl: '/books/hp_chamber_secrets_3.jpg',
+          isPrimary: false,
         },
       }),
-      // A Clash of Kings (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // A Clash of Kings
+      prisma.bookImage.create({
         data: {
-          book_id: books[6].id,
-          image_url: '/books/clash_of_kings_1.jpg',
-          is_primary: true,
+          bookId: books[6].id,
+          imageUrl: '/books/clash_of_kings_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[6].id,
-          image_url: '/books/clash_of_kings_2.jpg',
-          is_primary: false,
+          bookId: books[6].id,
+          imageUrl: '/books/clash_of_kings_2.jpg',
+          isPrimary: false,
         },
       }),
-      // The Fellowship of the Ring (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // The Fellowship of the Ring
+      prisma.bookImage.create({
         data: {
-          book_id: books[7].id,
-          image_url: '/books/book_8.jpg',
-          is_primary: true,
+          bookId: books[7].id,
+          imageUrl: '/books/book_8.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[7].id,
-          image_url: '/books/fellowship_ring_2.jpg',
-          is_primary: false,
+          bookId: books[7].id,
+          imageUrl: '/books/fellowship_ring_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[7].id,
-          image_url: '/books/fellowship_ring_3.jpg',
-          is_primary: false,
+          bookId: books[7].id,
+          imageUrl: '/books/fellowship_ring_3.jpg',
+          isPrimary: false,
         },
       }),
-      // And Then There Were None (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // And Then There Were None
+      prisma.bookImage.create({
         data: {
-          book_id: books[8].id,
-          image_url: '/books/book_9.jpg',
-          is_primary: true,
+          bookId: books[8].id,
+          imageUrl: '/books/book_9.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[8].id,
-          image_url: '/books/and_then_none_2.jpg',
-          is_primary: false,
+          bookId: books[8].id,
+          imageUrl: '/books/and_then_none_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[8].id,
-          image_url: '/books/and_then_none_3.jpg',
-          is_primary: false,
+          bookId: books[8].id,
+          imageUrl: '/books/and_then_none_3.jpg',
+          isPrimary: false,
         },
       }),
-      // It (3 images, using original path for primary)
-      prisma.bookImages.create({
+      // It
+      prisma.bookImage.create({
         data: {
-          book_id: books[9].id,
-          image_url: '/books/book_10.jpg',
-          is_primary: true,
+          bookId: books[9].id,
+          imageUrl: '/books/book_10.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[9].id,
-          image_url: '/books/it_2.jpg',
-          is_primary: false,
+          bookId: books[9].id,
+          imageUrl: '/books/it_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[9].id,
-          image_url: '/books/it_3.jpg',
-          is_primary: false,
+          bookId: books[9].id,
+          imageUrl: '/books/it_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Pride and Prejudice (3 images)
-      prisma.bookImages.create({
+      // Pride and Prejudice
+      prisma.bookImage.create({
         data: {
-          book_id: books[10].id,
-          image_url: '/books/pride_prejudice_1.jpg',
-          is_primary: true,
+          bookId: books[10].id,
+          imageUrl: '/books/pride_prejudice_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[10].id,
-          image_url: '/books/pride_prejudice_2.jpg',
-          is_primary: false,
+          bookId: books[10].id,
+          imageUrl: '/books/pride_prejudice_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[10].id,
-          image_url: '/books/pride_prejudice_3.jpg',
-          is_primary: false,
+          bookId: books[10].id,
+          imageUrl: '/books/pride_prejudice_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Sense and Sensibility (3 images)
-      prisma.bookImages.create({
+      // Sense and Sensibility
+      prisma.bookImage.create({
         data: {
-          book_id: books[11].id,
-          image_url: '/books/sense_sensibility_1.jpg',
-          is_primary: true,
+          bookId: books[11].id,
+          imageUrl: '/books/sense_sensibility_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[11].id,
-          image_url: '/books/sense_sensibility_2.jpg',
-          is_primary: false,
+          bookId: books[11].id,
+          imageUrl: '/books/sense_sensibility_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[11].id,
-          image_url: '/books/sense_sensibility_3.jpg',
-          is_primary: false,
+          bookId: books[11].id,
+          imageUrl: '/books/sense_sensibility_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Harry Potter and the Prisoner of Azkaban (3 images)
-      prisma.bookImages.create({
+      // Harry Potter and the Prisoner of Azkaban
+      prisma.bookImage.create({
         data: {
-          book_id: books[12].id,
-          image_url: '/books/hp_prisoner_azkaban_1.jpg',
-          is_primary: true,
+          bookId: books[12].id,
+          imageUrl: '/books/hp_prisoner_azkaban_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[12].id,
-          image_url: '/books/hp_prisoner_azkaban_2.jpg',
-          is_primary: false,
+          bookId: books[12].id,
+          imageUrl: '/books/hp_prisoner_azkaban_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[12].id,
-          image_url: '/books/hp_prisoner_azkaban_3.jpg',
-          is_primary: false,
+          bookId: books[12].id,
+          imageUrl: '/books/hp_prisoner_azkaban_3.jpg',
+          isPrimary: false,
         },
       }),
-      // The Silmarillion (3 images)
-      prisma.bookImages.create({
+      // The Silmarillion
+      prisma.bookImage.create({
         data: {
-          book_id: books[13].id,
-          image_url: '/books/silmarillion_1.jpg',
-          is_primary: true,
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[13].id,
-          image_url: '/books/silmarillion_2.jpg',
-          is_primary: false,
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[13].id,
-          image_url: '/books/silmarillion_3.jpg',
-          is_primary: false,
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Carrie (3 images)
-      prisma.bookImages.create({
+      // Carrie
+      prisma.bookImage.create({
         data: {
-          book_id: books[14].id,
-          image_url: '/books/carrie_1.jpg',
-          is_primary: true,
+          bookId: books[14].id,
+          imageUrl: '/books/carrie_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[14].id,
-          image_url: '/books/carrie_2.jpg',
-          is_primary: false,
+          bookId: books[14].id,
+          imageUrl: '/books/carrie_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[14].id,
-          image_url: '/books/carrie_3.jpg',
-          is_primary: false,
+          bookId: books[14].id,
+          imageUrl: '/books/carrie_3.jpg',
+          isPrimary: false,
         },
       }),
-      // American Gods (3 images)
-      prisma.bookImages.create({
+      // American Gods
+      prisma.bookImage.create({
         data: {
-          book_id: books[15].id,
-          image_url: '/books/american_gods_1.jpg',
-          is_primary: true,
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[15].id,
-          image_url: '/books/american_gods_2.jpg',
-          is_primary: false,
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[15].id,
-          image_url: '/books/american_gods_3.jpg',
-          is_primary: false,
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Beloved (2 images)
-      prisma.bookImages.create({
+      // Beloved
+      prisma.bookImage.create({
         data: {
-          book_id: books[16].id,
-          image_url: '/books/beloved_1.jpg',
-          is_primary: true,
+          bookId: books[16].id,
+          imageUrl: '/books/beloved_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[16].id,
-          image_url: '/books/beloved_2.jpg',
-          is_primary: false,
+          bookId: books[16].id,
+          imageUrl: '/books/beloved_2.jpg',
+          isPrimary: false,
         },
       }),
-      // Norwegian Wood (3 images)
-      prisma.bookImages.create({
+      // Norwegian Wood
+      prisma.bookImage.create({
         data: {
-          book_id: books[17].id,
-          image_url: '/books/norwegian_wood_1.jpg',
-          is_primary: true,
+          bookId: books[17].id,
+          imageUrl: '/books/norwegian_wood_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[17].id,
-          image_url: '/books/norwegian_wood_2.jpg',
-          is_primary: false,
+          bookId: books[17].id,
+          imageUrl: '/books/norwegian_wood_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[17].id,
-          image_url: '/books/norwegian_wood_3.jpg',
-          is_primary: false,
+          bookId: books[17].id,
+          imageUrl: '/books/norwegian_wood_3.jpg',
+          isPrimary: false,
         },
       }),
-      // The Handmaid’s Tale (3 images)
-      prisma.bookImages.create({
+      // The Handmaid’s Tale
+      prisma.bookImage.create({
         data: {
-          book_id: books[18].id,
-          image_url: '/books/handmaids_tale_1.jpg',
-          is_primary: true,
+          bookId: books[18].id,
+          imageUrl: '/books/handmaids_tale_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[18].id,
-          image_url: '/books/handmaids_tale_2.jpg',
-          is_primary: false,
+          bookId: books[18].id,
+          imageUrl: '/books/handmaids_tale_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[18].id,
-          image_url: '/books/handmaids_tale_3.jpg',
-          is_primary: false,
+          bookId: books[18].id,
+          imageUrl: '/books/handmaids_tale_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Harry Potter and the Goblet of Fire (3 images)
-      prisma.bookImages.create({
+      // Harry Potter and the Goblet of Fire
+      prisma.bookImage.create({
         data: {
-          book_id: books[19].id,
-          image_url: '/books/hp_goblet_fire_1.jpg',
-          is_primary: true,
+          bookId: books[19].id,
+          imageUrl: '/books/hp_goblet_fire_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[19].id,
-          image_url: '/books/hp_goblet_fire_2.jpg',
-          is_primary: false,
+          bookId: books[19].id,
+          imageUrl: '/books/hp_goblet_fire_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[19].id,
-          image_url: '/books/hp_goblet_fire_3.jpg',
-          is_primary: false,
+          bookId: books[19].id,
+          imageUrl: '/books/hp_goblet_fire_3.jpg',
+          isPrimary: false,
         },
       }),
-      // A Storm of Swords (3 images)
-      prisma.bookImages.create({
+      // A Storm of Swords
+      prisma.bookImage.create({
         data: {
-          book_id: books[20].id,
-          image_url: '/books/storm_of_swords_1.jpg',
-          is_primary: true,
+          bookId: books[20].id,
+          imageUrl: '/books/storm_of_swords_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[20].id,
-          image_url: '/books/storm_of_swords_2.jpg',
-          is_primary: false,
+          bookId: books[20].id,
+          imageUrl: '/books/storm_of_swords_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[20].id,
-          image_url: '/books/storm_of_swords_3.jpg',
-          is_primary: false,
+          bookId: books[20].id,
+          imageUrl: '/books/storm_of_swords_3.jpg',
+          isPrimary: false,
         },
       }),
-      // The Two Towers (3 images)
-      prisma.bookImages.create({
+      // The Two Towers
+      prisma.bookImage.create({
         data: {
-          book_id: books[21].id,
-          image_url: '/books/two_towers_1.jpg',
-          is_primary: true,
+          bookId: books[21].id,
+          imageUrl: '/books/two_towers_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[21].id,
-          image_url: '/books/two_towers_2.jpg',
-          is_primary: false,
+          bookId: books[21].id,
+          imageUrl: '/books/two_towers_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[21].id,
-          image_url: '/books/two_towers_3.jpg',
-          is_primary: false,
+          bookId: books[21].id,
+          imageUrl: '/books/two_towers_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Death on the Nile (3 images)
-      prisma.bookImages.create({
+      // Death on the Nile
+      prisma.bookImage.create({
         data: {
-          book_id: books[22].id,
-          image_url: '/books/death_nile_1.jpg',
-          is_primary: true,
+          bookId: books[22].id,
+          imageUrl: '/books/death_nile_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[22].id,
-          image_url: '/books/death_nile_2.jpg',
-          is_primary: false,
+          bookId: books[22].id,
+          imageUrl: '/books/death_nile_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[22].id,
-          image_url: '/books/death_nile_3.jpg',
-          is_primary: false,
+          bookId: books[22].id,
+          imageUrl: '/books/death_nile_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Salem’s Lot (3 images)
-      prisma.bookImages.create({
+      // Salem’s Lot
+      prisma.bookImage.create({
         data: {
-          book_id: books[23].id,
-          image_url: '/books/salems_lot_1.jpg',
-          is_primary: true,
+          bookId: books[23].id,
+          imageUrl: '/books/salems_lot_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[23].id,
-          image_url: '/books/salems_lot_2.jpg',
-          is_primary: false,
+          bookId: books[23].id,
+          imageUrl: '/books/salems_lot_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[23].id,
-          image_url: '/books/salems_lot_3.jpg',
-          is_primary: false,
+          bookId: books[23].id,
+          imageUrl: '/books/salems_lot_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Emma (3 images)
-      prisma.bookImages.create({
+      // Emma
+      prisma.bookImage.create({
         data: {
-          book_id: books[24].id,
-          image_url: '/books/emma_1.jpg',
-          is_primary: true,
+          bookId: books[24].id,
+          imageUrl: '/books/emma_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[24].id,
-          image_url: '/books/emma_2.jpg',
-          is_primary: false,
+          bookId: books[24].id,
+          imageUrl: '/books/emma_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[24].id,
-          image_url: '/books/emma_3.jpg',
-          is_primary: false,
+          bookId: books[24].id,
+          imageUrl: '/books/emma_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Good Omens (3 images)
-      prisma.bookImages.create({
+      // Good Omens
+      prisma.bookImage.create({
         data: {
-          book_id: books[25].id,
-          image_url: '/books/good_omens_1.jpg',
-          is_primary: true,
+          bookId: books[25].id,
+          imageUrl: '/books/good_omens_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[25].id,
-          image_url: '/books/good_omens_2.jpg',
-          is_primary: false,
+          bookId: books[25].id,
+          imageUrl: '/books/good_omens_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[25].id,
-          image_url: '/books/good_omens_3.jpg',
-          is_primary: false,
+          bookId: books[25].id,
+          imageUrl: '/books/good_omens_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Song of Solomon (2 images)
-      prisma.bookImages.create({
+      // Song of Solomon
+      prisma.bookImage.create({
         data: {
-          book_id: books[26].id,
-          image_url: '/books/song_of_solomon_1.jpg',
-          is_primary: true,
+          bookId: books[26].id,
+          imageUrl: '/books/song_of_solomon_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[26].id,
-          image_url: '/books/song_of_solomon_2.jpg',
-          is_primary: false,
+          bookId: books[26].id,
+          imageUrl: '/books/song_of_solomon_2.jpg',
+          isPrimary: false,
         },
       }),
-      // Kafka on the Shore (3 images)
-      prisma.bookImages.create({
+      // Kafka on the Shore
+      prisma.bookImage.create({
         data: {
-          book_id: books[27].id,
-          image_url: '/books/kafka_shore_1.jpg',
-          is_primary: true,
+          bookId: books[27].id,
+          imageUrl: '/books/kafka_shore_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[27].id,
-          image_url: '/books/kafka_shore_2.jpg',
-          is_primary: false,
+          bookId: books[27].id,
+          imageUrl: '/books/kafka_shore_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[27].id,
-          image_url: '/books/kafka_shore_3.jpg',
-          is_primary: false,
+          bookId: books[27].id,
+          imageUrl: '/books/kafka_shore_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Oryx and Crake (3 images)
-      prisma.bookImages.create({
+      // Oryx and Crake
+      prisma.bookImage.create({
         data: {
-          book_id: books[28].id,
-          image_url: '/books/oryx_crake_1.jpg',
-          is_primary: true,
+          bookId: books[28].id,
+          imageUrl: '/books/oryx_crake_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[28].id,
-          image_url: '/books/oryx_crake_2.jpg',
-          is_primary: false,
+          bookId: books[28].id,
+          imageUrl: '/books/oryx_crake_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[28].id,
-          image_url: '/books/oryx_crake_3.jpg',
-          is_primary: false,
+          bookId: books[28].id,
+          imageUrl: '/books/oryx_crake_3.jpg',
+          isPrimary: false,
         },
       }),
-      // Neverwhere (3 images)
-      prisma.bookImages.create({
+      // Neverwhere
+      prisma.bookImage.create({
         data: {
-          book_id: books[29].id,
-          image_url: '/books/neverwhere_1.jpg',
-          is_primary: true,
+          bookId: books[29].id,
+          imageUrl: '/books/neverwhere_1.jpg',
+          isPrimary: true,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[29].id,
-          image_url: '/books/neverwhere_2.jpg',
-          is_primary: false,
+          bookId: books[29].id,
+          imageUrl: '/books/neverwhere_2.jpg',
+          isPrimary: false,
         },
       }),
-      prisma.bookImages.create({
+      prisma.bookImage.create({
         data: {
-          book_id: books[29].id,
-          image_url: '/books/neverwhere_3.jpg',
-          is_primary: false,
+          bookId: books[29].id,
+          imageUrl: '/books/neverwhere_3.jpg',
+          isPrimary: false,
         },
       }),
     ]);
@@ -1457,9 +1456,9 @@ async function main() {
     // Create Inventories
     await Promise.all(
       books.map((book, index) =>
-        prisma.inventories.create({
+        prisma.inventory.create({
           data: {
-            book_id: book.id,
+            bookId: book.id,
             quantity: 30 + index * 3, // 30 to 117 books in stock
           },
         })
@@ -1468,135 +1467,135 @@ async function main() {
 
     // Create Carts
     const carts = await Promise.all([
-      prisma.carts.create({
-        data: { user_id: users[0].id, date: new Date('2025-06-10') },
+      prisma.cart.create({
+        data: { userId: users[0].id, date: new Date('2025-06-10') },
       }),
-      prisma.carts.create({
-        data: { user_id: users[2].id, date: new Date('2025-06-11') },
+      prisma.cart.create({
+        data: { userId: users[2].id, date: new Date('2025-06-11') },
       }),
-      prisma.carts.create({
-        data: { user_id: users[3].id, date: new Date('2025-06-12') },
+      prisma.cart.create({
+        data: { userId: users[3].id, date: new Date('2025-06-12') },
       }),
-      prisma.carts.create({
-        data: { user_id: users[4].id, date: new Date('2025-06-13') },
+      prisma.cart.create({
+        data: { userId: users[4].id, date: new Date('2025-06-13') },
       }),
     ]);
 
     // Create CartItems
     await Promise.all([
-      prisma.cartItems.create({
-        data: { cart_id: carts[0].id, book_id: books[0].id, quantity: 2 },
+      prisma.cartItem.create({
+        data: { cartId: carts[0].id, bookId: books[0].id, quantity: 2 },
       }), // Harry Potter 1
-      prisma.cartItems.create({
-        data: { cart_id: carts[0].id, book_id: books[3].id, quantity: 1 },
+      prisma.cartItem.create({
+        data: { cartId: carts[0].id, bookId: books[3].id, quantity: 1 },
       }), // Murder on the Orient Express
-      prisma.cartItems.create({
-        data: { cart_id: carts[1].id, book_id: books[4].id, quantity: 1 },
+      prisma.cartItem.create({
+        data: { cartId: carts[1].id, bookId: books[4].id, quantity: 1 },
       }), // The Shining
-      prisma.cartItems.create({
-        data: { cart_id: carts[1].id, book_id: books[10].id, quantity: 3 },
+      prisma.cartItem.create({
+        data: { cartId: carts[1].id, bookId: books[10].id, quantity: 3 },
       }), // Pride and Prejudice
-      prisma.cartItems.create({
-        data: { cart_id: carts[2].id, book_id: books[7].id, quantity: 2 },
+      prisma.cartItem.create({
+        data: { cartId: carts[2].id, bookId: books[7].id, quantity: 2 },
       }), // The Fellowship of the Ring
-      prisma.cartItems.create({
-        data: { cart_id: carts[2].id, book_id: books[12].id, quantity: 1 },
+      prisma.cartItem.create({
+        data: { cartId: carts[2].id, bookId: books[12].id, quantity: 1 },
       }), // Harry Potter 3
-      prisma.cartItems.create({
-        data: { cart_id: carts[3].id, book_id: books[18].id, quantity: 2 },
+      prisma.cartItem.create({
+        data: { cartId: carts[3].id, bookId: books[18].id, quantity: 2 },
       }), // The Handmaid’s Tale
-      prisma.cartItems.create({
-        data: { cart_id: carts[3].id, book_id: books[25].id, quantity: 1 },
+      prisma.cartItem.create({
+        data: { cartId: carts[3].id, bookId: books[25].id, quantity: 1 },
       }), // Good Omens
     ]);
 
     // Create Reviews
     await Promise.all([
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[0].id,
-          book_id: books[0].id,
+          userId: users[0].id,
+          bookId: books[0].id,
           text: 'A magical adventure that captivated me from start to finish!',
           rating: 5,
           date: new Date('2025-05-01'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[1].id,
-          book_id: books[4].id,
+          userId: users[1].id,
+          bookId: books[4].id,
           text: 'Terrifyingly good, kept me up all night!',
           rating: 4,
           date: new Date('2025-05-02'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[2].id,
-          book_id: books[3].id,
+          userId: users[2].id,
+          bookId: books[3].id,
           text: 'A classic mystery, loved the twists and turns!',
           rating: 5,
           date: new Date('2025-05-03'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[2].id,
-          book_id: books[10].id,
+          userId: users[2].id,
+          bookId: books[10].id,
           text: 'Timeless romance, beautifully written.',
           rating: 5,
           date: new Date('2025-05-04'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[3].id,
-          book_id: books[1].id,
+          userId: users[3].id,
+          bookId: books[1].id,
           text: 'Epic storytelling, though it can be dense at times.',
           rating: 4,
           date: new Date('2025-05-05'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[0].id,
-          book_id: books[7].id,
+          userId: users[0].id,
+          bookId: books[7].id,
           text: 'An epic start to a legendary trilogy, breathtaking!',
           rating: 5,
           date: new Date('2025-05-06'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[3].id,
-          book_id: books[14].id,
+          userId: users[3].id,
+          bookId: books[14].id,
           text: 'Chilling and intense, a great debut by King!',
           rating: 4,
           date: new Date('2025-05-07'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[4].id,
-          book_id: books[18].id,
+          userId: users[4].id,
+          bookId: books[18].id,
           text: 'A powerful and unsettling dystopian tale.',
           rating: 5,
           date: new Date('2025-05-08'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[2].id,
-          book_id: books[16].id,
+          userId: users[2].id,
+          bookId: books[16].id,
           text: 'Deeply moving and beautifully crafted.',
           rating: 5,
           date: new Date('2025-05-09'),
         },
       }),
-      prisma.reviews.create({
+      prisma.review.create({
         data: {
-          user_id: users[1].id,
-          book_id: books[25].id,
+          userId: users[1].id,
+          bookId: books[25].id,
           text: 'Hilarious and heartfelt, a unique fantasy.',
           rating: 4,
           date: new Date('2025-05-10'),
@@ -1606,52 +1605,52 @@ async function main() {
 
     // Create Orders
     const orders = await Promise.all([
-      prisma.orders.create({
+      prisma.order.create({
         data: {
-          user_id: users[0].id,
-          total_price: 19.99 * 2 + 12.99, // 2x Harry Potter 1 + Murder on the Orient Express
-          shipping_address: '123 Main St, Kyiv, Ukraine',
-          payment_method: 'Credit Card',
+          userId: users[0].id,
+          totalPrice: 19.99 * 2 + 12.99, // 2x Harry Potter 1 + Murder on the Orient Express
+          shippingAddress: '123 Main St, Kyiv, Ukraine',
+          paymentMethod: 'Credit Card',
           status: 'PENDING',
           date: new Date('2025-06-01'),
         },
       }),
-      prisma.orders.create({
+      prisma.order.create({
         data: {
-          user_id: users[2].id,
-          total_price: 17.99 + 14.99 * 3, // The Shining + 3x Pride and Prejudice
-          shipping_address: '456 Oak Ave, Lviv, Ukraine',
-          payment_method: 'PayPal',
+          userId: users[2].id,
+          totalPrice: 17.99 + 14.99 * 3, // The Shining + 3x Pride and Prejudice
+          shippingAddress: '456 Oak Ave, Lviv, Ukraine',
+          paymentMethod: 'PayPal',
           status: 'SHIPPED',
           date: new Date('2025-06-02'),
         },
       }),
-      prisma.orders.create({
+      prisma.order.create({
         data: {
-          user_id: users[3].id,
-          total_price: 18.99 * 2, // 2x The Fellowship of the Ring
-          shipping_address: '789 Pine Rd, Odesa, Ukraine',
-          payment_method: 'Credit Card',
+          userId: users[3].id,
+          totalPrice: 18.99 * 2, // 2x The Fellowship of the Ring
+          shippingAddress: '789 Pine Rd, Odesa, Ukraine',
+          paymentMethod: 'Credit Card',
           status: 'DELIVERED',
           date: new Date('2025-06-03'),
         },
       }),
-      prisma.orders.create({
+      prisma.order.create({
         data: {
-          user_id: users[4].id,
-          total_price: 15.99 * 2 + 17.99, // 2x The Handmaid’s Tale + Good Omens
-          shipping_address: '321 Elm St, Dnipro, Ukraine',
-          payment_method: 'Credit Card',
+          userId: users[4].id,
+          totalPrice: 15.99 * 2 + 17.99, // 2x The Handmaid’s Tale + Good Omens
+          shippingAddress: '321 Elm St, Dnipro, Ukraine',
+          paymentMethod: 'Credit Card',
           status: 'PENDING',
           date: new Date('2025-06-04'),
         },
       }),
-      prisma.orders.create({
+      prisma.order.create({
         data: {
-          user_id: users[0].id,
-          total_price: 16.99, // Beloved
-          shipping_address: '123 Main St, Kyiv, Ukraine',
-          payment_method: 'PayPal',
+          userId: users[0].id,
+          totalPrice: 16.99, // Beloved
+          shippingAddress: '123 Main St, Kyiv, Ukraine',
+          paymentMethod: 'PayPal',
           status: 'CANCELED',
           date: new Date('2025-06-05'),
         },
@@ -1661,33 +1660,33 @@ async function main() {
     // Create OrderItems
     await Promise.all([
       // Order 1
-      prisma.orderItems.create({
-        data: { order_id: orders[0].id, book_id: books[0].id, quantity: 2 },
+      prisma.orderItem.create({
+        data: { orderId: orders[0].id, bookId: books[0].id, quantity: 2 },
       }),
-      prisma.orderItems.create({
-        data: { order_id: orders[0].id, book_id: books[3].id, quantity: 1 },
+      prisma.orderItem.create({
+        data: { orderId: orders[0].id, bookId: books[3].id, quantity: 1 },
       }),
       // Order 2
-      prisma.orderItems.create({
-        data: { order_id: orders[1].id, book_id: books[4].id, quantity: 1 },
+      prisma.orderItem.create({
+        data: { orderId: orders[1].id, bookId: books[4].id, quantity: 1 },
       }),
-      prisma.orderItems.create({
-        data: { order_id: orders[1].id, book_id: books[10].id, quantity: 3 },
+      prisma.orderItem.create({
+        data: { orderId: orders[1].id, bookId: books[10].id, quantity: 3 },
       }),
       // Order 3
-      prisma.orderItems.create({
-        data: { order_id: orders[2].id, book_id: books[7].id, quantity: 2 },
+      prisma.orderItem.create({
+        data: { orderId: orders[2].id, bookId: books[7].id, quantity: 2 },
       }),
       // Order 4
-      prisma.orderItems.create({
-        data: { order_id: orders[3].id, book_id: books[18].id, quantity: 2 },
+      prisma.orderItem.create({
+        data: { orderId: orders[3].id, bookId: books[18].id, quantity: 2 },
       }),
-      prisma.orderItems.create({
-        data: { order_id: orders[3].id, book_id: books[25].id, quantity: 1 },
+      prisma.orderItem.create({
+        data: { orderId: orders[3].id, bookId: books[25].id, quantity: 1 },
       }),
       // Order 5
-      prisma.orderItems.create({
-        data: { order_id: orders[4].id, book_id: books[16].id, quantity: 1 },
+      prisma.orderItem.create({
+        data: { orderId: orders[4].id, bookId: books[16].id, quantity: 1 },
       }),
     ]);
   });

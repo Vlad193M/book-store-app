@@ -19,9 +19,9 @@ export default function Page() {
         <Suspense fallback={<ListRecommendedBooksSkeleton count={4} />}>
           <CartRecommendationsBooks
             bookIds={[
-              'cmbxra5v4000pbzasugo6tar9',
-              'cmbxra5v4000rbzasvkbyu6rm',
-              'cmbxra5v50019bzasdd8fshmk',
+              'cmc0dbpu10019bzl4tvukigxr',
+              'cmc0dbpu2001pbzl4g8vr7iby',
+              'cmc0dbpu3001zbzl479djrbvg',
             ]}
           />
         </Suspense>

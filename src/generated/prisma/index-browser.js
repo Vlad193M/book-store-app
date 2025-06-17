@@ -120,19 +120,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UsersScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  password_hash: 'password_hash',
+  passwordHash: 'passwordHash',
   role: 'role',
-  created_at: 'created_at'
+  createdAt: 'createdAt'
 };
 
-exports.Prisma.BooksScalarFieldEnum = {
+exports.Prisma.BookScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  author_id: 'author_id',
+  authorId: 'authorId',
   price: 'price',
   description: 'description',
   annotation: 'annotation',
@@ -143,76 +143,76 @@ exports.Prisma.BooksScalarFieldEnum = {
   dimensions: 'dimensions',
   weight: 'weight',
   publisher: 'publisher',
-  publication_year: 'publication_year'
+  publicationYear: 'publicationYear'
 };
 
-exports.Prisma.AuthorsScalarFieldEnum = {
+exports.Prisma.AuthorScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description'
 };
 
-exports.Prisma.CategoriesScalarFieldEnum = {
+exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  parent_id: 'parent_id',
+  parentId: 'parentId',
   description: 'description'
 };
 
-exports.Prisma.BookCategoriesScalarFieldEnum = {
-  book_id: 'book_id',
-  category_id: 'category_id'
+exports.Prisma.BookCategoryScalarFieldEnum = {
+  bookId: 'bookId',
+  categoryId: 'categoryId'
 };
 
-exports.Prisma.BookImagesScalarFieldEnum = {
+exports.Prisma.BookImageScalarFieldEnum = {
   id: 'id',
-  book_id: 'book_id',
-  image_url: 'image_url',
-  is_primary: 'is_primary'
+  bookId: 'bookId',
+  imageUrl: 'imageUrl',
+  isPrimary: 'isPrimary'
 };
 
-exports.Prisma.InventoriesScalarFieldEnum = {
+exports.Prisma.InventoryScalarFieldEnum = {
   id: 'id',
-  book_id: 'book_id',
+  bookId: 'bookId',
   quantity: 'quantity'
 };
 
-exports.Prisma.CartsScalarFieldEnum = {
+exports.Prisma.CartScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
+  userId: 'userId',
   date: 'date'
 };
 
-exports.Prisma.CartItemsScalarFieldEnum = {
+exports.Prisma.CartItemScalarFieldEnum = {
   id: 'id',
-  cart_id: 'cart_id',
-  book_id: 'book_id',
+  cartId: 'cartId',
+  bookId: 'bookId',
   quantity: 'quantity'
 };
 
-exports.Prisma.ReviewsScalarFieldEnum = {
+exports.Prisma.ReviewScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  book_id: 'book_id',
+  userId: 'userId',
+  bookId: 'bookId',
   text: 'text',
   rating: 'rating',
   date: 'date'
 };
 
-exports.Prisma.OrdersScalarFieldEnum = {
+exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  total_price: 'total_price',
-  shipping_address: 'shipping_address',
-  payment_method: 'payment_method',
+  userId: 'userId',
+  totalPrice: 'totalPrice',
+  shippingAddress: 'shippingAddress',
+  paymentMethod: 'paymentMethod',
   date: 'date',
   status: 'status'
 };
 
-exports.Prisma.OrderItemsScalarFieldEnum = {
+exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
-  order_id: 'order_id',
-  book_id: 'book_id',
+  orderId: 'orderId',
+  bookId: 'bookId',
   quantity: 'quantity'
 };
 
@@ -250,18 +250,18 @@ exports.OrderStatus = exports.$Enums.OrderStatus = {
 };
 
 exports.Prisma.ModelName = {
-  Users: 'Users',
-  Books: 'Books',
-  Authors: 'Authors',
-  Categories: 'Categories',
-  BookCategories: 'BookCategories',
-  BookImages: 'BookImages',
-  Inventories: 'Inventories',
-  Carts: 'Carts',
-  CartItems: 'CartItems',
-  Reviews: 'Reviews',
-  Orders: 'Orders',
-  OrderItems: 'OrderItems'
+  User: 'User',
+  Book: 'Book',
+  Author: 'Author',
+  Category: 'Category',
+  BookCategory: 'BookCategory',
+  BookImage: 'BookImage',
+  Inventory: 'Inventory',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
+  Review: 'Review',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**

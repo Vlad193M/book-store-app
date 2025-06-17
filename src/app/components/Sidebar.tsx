@@ -1,20 +1,20 @@
 'use client';
 
-import { Categories } from '@/generated/prisma';
+import { Category } from '@/generated/prisma';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 
-const searchChildCategories = (categories: Categories[], id: string) => {
-  return categories.filter((category) => category.parent_id === id);
+const searchChildCategories = (categories: Category[], id: string) => {
+  return categories.filter((category) => category.parentId === id);
 };
 
 interface SidebarProps {
-  categories: Categories[];
+  categories: Category[];
 }
 
 interface ChildCategoriesState {
   parentId: string;
-  categoriesArray: Categories[];
+  categoriesArray: Category[];
 }
 
 export default function Sidebar({ categories }: SidebarProps) {
@@ -22,7 +22,7 @@ export default function Sidebar({ categories }: SidebarProps) {
     useState<ChildCategoriesState>();
 
   const parentCategories = useMemo(
-    () => categories.filter((category) => !category.parent_id),
+    () => categories.filter((category) => !category.parentId),
     [categories],
   );
 

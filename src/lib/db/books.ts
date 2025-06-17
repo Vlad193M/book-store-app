@@ -1,12 +1,12 @@
 import { db } from '../db';
 
 export async function getBookPageData(bookId: string) {
-  const book = await db.books.findUnique({
+  const book = await db.book.findUnique({
     where: {
       id: bookId,
     },
     include: {
-      book_images: true,
+      bookImages: true,
       reviews: {
         select: {
           id: true,
@@ -17,10 +17,10 @@ export async function getBookPageData(bookId: string) {
         },
       },
       author: true,
-      book_categories: {
+      bookCategories: {
         include: { category: true },
       },
-      inventories: true,
+      inventory: true,
     },
   });
 
@@ -52,27 +52,27 @@ export async function getBooksBySimilarCategories({
 
   if (targetIds.length === 0) return [];
 
-  const bookCategories = await db.bookCategories.findMany({
+  const bookCategories = await db.bookCategory.findMany({
     include: { category: true },
-    where: { book_id: { in: targetIds } },
+    where: { bookId: { in: targetIds } },
   });
 
   if (bookCategories.length === 0) return [];
 
   const arrayCategoryId = [
-    ...new Set(bookCategories.map((c) => c.category_id)),
+    ...new Set(bookCategories.map((c) => c.categoryId)),
   ];
 
-  const similarBooks = await db.books.findMany({
+  const similarBooks = await db.book.findMany({
     include: {
-      book_categories: true,
-      inventories: true,
-      book_images: true,
+      bookCategories: true,
+      inventory: true,
+      bookImages: true,
     },
     where: {
-      book_categories: {
+      bookCategories: {
         some: {
-          category_id: { in: arrayCategoryId },
+          categoryId: { in: arrayCategoryId },
         },
       },
       id: {
@@ -80,7 +80,7 @@ export async function getBooksBySimilarCategories({
       },
     },
     orderBy: {
-      inventories: {
+      inventory: {
         quantity: order,
       },
     },

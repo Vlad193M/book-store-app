@@ -8,7 +8,7 @@ export function extractDescriptionData(
   const {
     id,
     name,
-    author_id,
+    authorId,
     price,
     description,
     annotation,
@@ -19,17 +19,17 @@ export function extractDescriptionData(
     dimensions,
     weight,
     publisher,
-    publication_year,
+    publicationYear,
 
     author,
-    book_categories,
-    inventories,
+    bookCategories,
+    inventory,
   } = book;
 
   return {
     id,
     name,
-    author_id,
+    authorId,
     price,
     description,
     annotation,
@@ -40,10 +40,10 @@ export function extractDescriptionData(
     dimensions,
     weight,
     publisher,
-    publication_year,
+    publicationYear,
 
     author,
-    book_categories,
-    inventories,
+    bookCategories,
+    inventory
   };
 }

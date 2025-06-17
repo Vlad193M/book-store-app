@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { BookImages } from '@/generated/prisma';
+import { BookImage } from '@/generated/prisma';
 import { Navigation, Pagination, Scrollbar, Zoom } from 'swiper/modules';
 
 import { useSwiperController } from '@/hooks/useSwiperController';
@@ -15,7 +15,7 @@ import 'swiper/css/zoom';
 
 interface ImagesSwapperProps {
   bookName: string;
-  bookImages: BookImages[];
+  bookImages: BookImage[];
 }
 
 export default function ImagesSwapper({
@@ -36,7 +36,7 @@ export default function ImagesSwapper({
             } border-2`}
           >
             <Image
-              src={image.image_url ?? ''}
+              src={image.imageUrl ?? ''}
               alt='book image'
               fill
               className='object-contain'
@@ -62,7 +62,7 @@ export default function ImagesSwapper({
           {bookImages.map((image) => (
             <SwiperSlide key={image.id} className='!w-full'>
               <Image
-                src={image.image_url ?? ''}
+                src={image.imageUrl ?? ''}
                 alt={bookName}
                 fill
                 className='object-contain w-full h-full'

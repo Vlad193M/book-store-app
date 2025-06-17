@@ -1,9 +1,9 @@
 import { Prisma } from '@/generated/prisma';
 import { getBookPageData } from '@/lib/db/books';
 
-// export type BookPageDataType = Prisma.BooksGetPayload<{
+// export type BookPageDataType = Prisma.BookGetPayload<{
 //   include: {
-//     book_images: true;
+//     bookImages: true;
 //     reviews: {
 //       select: {
 //         id: true;
@@ -14,24 +14,24 @@ import { getBookPageData } from '@/lib/db/books';
 //       };
 //     };
 //     author: true;
-//     book_categories: true;
-//     inventories: true;
+//     bookCategories: true;
+//     inventory: true;
 //   };
 // }>;
 
 export type BookPageDataType = Awaited<ReturnType<typeof getBookPageData>>;
 
-export type DescriptionComponentType = Prisma.BooksGetPayload<{
+export type DescriptionComponentType = Prisma.BookGetPayload<{
   include: {
     author: true;
-    book_categories: {
-      include: { category: true },
-    },
-    inventories: true;
+    bookCategories: {
+      include: { category: true };
+    };
+    inventory: true;
   };
 }>;
 
-export type ReviewComponentType = Prisma.ReviewsGetPayload<{
+export type ReviewComponentType = Prisma.ReviewGetPayload<{
   select: {
     id: true;
     text: true;

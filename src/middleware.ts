@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
 
     const userId = tokenPayload.id as string;
 
-    const user = await db.users.findUnique({ where: { id: userId } });
+    const user = await db.user.findUnique({ where: { id: userId } });
 
     if (!user) {
       throw new Error('User don not exist');
