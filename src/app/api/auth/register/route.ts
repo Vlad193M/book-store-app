@@ -3,15 +3,41 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
-  const { name, email, password } = await request.json();
+interface RegisterRequestBody {
+  name: string;
+  email: string;
+  password: string;
+}
 
-  if (!name || !email || !password) {
+function isValidRegisterRequestBody(obj: any): obj is RegisterRequestBody {
+  return (
+    obj &&
+    typeof obj === 'object' &&
+    typeof obj.name === 'string' &&
+    obj.name.trim() !== '' &&
+    typeof obj.email === 'string' &&
+    obj.email.trim() !== '' &&
+    typeof obj.password === 'string' &&
+    obj.password.trim() !== ''
+  );
+}
+
+export async function POST(request: Request) {
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+  }
+
+  if (!isValidRegisterRequestBody(body)) {
     return NextResponse.json(
       { message: 'Invalid data format' },
-      { status: 400 },
+      { status: 400 }
     );
   }
+
+  const { name, email, password } = body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -46,7 +72,7 @@ export async function POST(request: Request) {
         message:
           'The server is temporarily unavailable. Please try again later.',
       },
-      { status: 503 },
+      { status: 503 }
     );
   }
 }

@@ -3,33 +3,56 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
-  const { email, password } = await request.json();
+interface LoginRequestBody {
+  email: string;
+  password: string;
+}
 
-  if (!email || !password) {
+function isValidLoginRequestBody(obj: any): obj is LoginRequestBody {
+  return (
+    obj &&
+    typeof obj === 'object' &&
+    typeof obj.email === 'string' &&
+    obj.email.trim() !== '' &&
+    typeof obj.password === 'string' &&
+    obj.password.trim() !== ''
+  );
+}
+
+export async function POST(request: Request) {
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+  }
+
+  if (!isValidLoginRequestBody(body)) {
     return NextResponse.json(
       { message: 'Invalid data format' },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
+  const { email, password } = body;
+
   try {
     const user = await db.user.findUnique({
-      where: {
-        email,
-      },
+      where: { email },
     });
 
-    if (!user)
+    if (!user) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
+    }
 
     const passwordIsValid = await bcrypt.compare(password, user.passwordHash);
 
-    if (!passwordIsValid)
+    if (!passwordIsValid) {
       return NextResponse.json(
         { message: 'Invalid password' },
-        { status: 401 },
+        { status: 401 }
       );
+    }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
       expiresIn: '24h',
@@ -46,14 +69,14 @@ export async function POST(request: Request) {
 
     return response;
   } catch (error: any) {
-    console.log(error.message);
+    console.error(error.message);
 
     return NextResponse.json(
       {
         message:
           'The server is temporarily unavailable. Please try again later.',
       },
-      { status: 503 },
+      { status: 503 }
     );
   }
 }

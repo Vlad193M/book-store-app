@@ -19,11 +19,26 @@ export default function CartItemRow({
 }: CartItemRowProps) {
   const tdBorderClass = isLast ? 'border-b-0' : 'border-b border-[#DEDFE1]';
 
+  async function handleDelete() {
+    const response = await fetch(
+      'http://localhost:3000/api/cart/item/73483423842834',{
+        method: "DELETE"
+      }
+    );
+
+    const body = await response.json();
+
+    console.log(response, body);
+  }
+
   return (
     <tr>
       <td className={`${tdBorderClass} px-2 md:px-4 py-0`}>
         <div className='flex items-center gap-2 md:gap-[16px]'>
-          <button className='shrink-0 w-[10px] h-[10px] md:w-[12px] md:h-[12px] relative'>
+          <button
+            onClick={handleDelete}
+            className='shrink-0 w-[10px] h-[10px] md:w-[12px] md:h-[12px] relative'
+          >
             <Image
               src={diagonalArrow}
               alt='Diagonal Arrow'
@@ -51,7 +66,9 @@ export default function CartItemRow({
           <button>
             <Image src={removeButton} alt='remove book' />
           </button>
-          <span className='text-[#414141] font-bold text-[14px] md:text-[16px]'>{count}</span>
+          <span className='text-[#414141] font-bold text-[14px] md:text-[16px]'>
+            {count}
+          </span>
           <button>
             <Image src={addButton} alt='add book' />
           </button>

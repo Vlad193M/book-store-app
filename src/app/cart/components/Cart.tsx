@@ -1,3 +1,5 @@
+"use client"
+
 import book from '@/../public/books/book_1.jpg';
 import CartItem from './CartItem';
 
