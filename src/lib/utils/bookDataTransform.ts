@@ -1,3 +1,4 @@
+import 'server-only';
 import { BookPageDataType, DescriptionComponentType } from '@/types/book';
 
 export function extractDescriptionData(

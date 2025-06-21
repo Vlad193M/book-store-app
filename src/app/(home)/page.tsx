@@ -1,10 +1,10 @@
-import ConfirmBtn from './(auth)/components/ConfirmBtn';
-import Input from './(auth)/components/Input';
+import ConfirmBtn from '../(auth)/components/ConfirmBtn';
+import Input from '../(auth)/components/Input';
 
 export default async function Page() {
   return (
     <div className='container flex flex-col gap-8'>
-      <Input
+      <Input  
         id='email'
         name='email'
         label='Enter your email'

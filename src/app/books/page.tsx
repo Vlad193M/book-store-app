@@ -37,7 +37,7 @@ export default async function Home() {
           {books.map((book) => (
             <Card
               key={book.id}
-              id={book.id}
+              bookId={book.id}
               price={book.price}
               title={book.name}
               src={

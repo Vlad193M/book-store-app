@@ -40,3 +40,19 @@ export type ReviewComponentType = Prisma.ReviewGetPayload<{
     user: { select: { name: true } };
   };
 }>;
+
+export type CartDataType = Prisma.CartGetPayload<{
+  include: {
+    cartItems: {
+      include: {
+        book: {
+          select: {
+            name: true;
+            price: true;
+            bookImages: { where: { isPrimary: true } };
+          };
+        };
+      };
+    };
+  };
+}>;

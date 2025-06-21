@@ -3,8 +3,9 @@ import { verifyAuth } from '@/lib/utils/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  const authResult = await verifyAuth(request);
+  // console.log('Runtime:', process.env.NEXT_RUNTIME);
 
+  const authResult = await verifyAuth(request);
   if (authResult instanceof NextResponse) {
     return authResult;
   }
@@ -14,7 +15,20 @@ export async function GET(request: NextRequest) {
   try {
     const cart = await db.cart.findUnique({
       where: { userId },
-      include: { cartItems: true },
+      include: {
+        cartItems: {
+          include: {
+            book: {
+              select: {
+                name: true,
+                price: true,
+                bookImages: { where: { isPrimary: true } },
+              },
+            },
+          },
+          orderBy: {bookId: 'desc'},
+        },
+      },
     });
 
     if (!cart) {
@@ -26,7 +40,7 @@ export async function GET(request: NextRequest) {
     console.log(error.message, 'message');
     return NextResponse.json(
       { error: 'Internal Server Error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

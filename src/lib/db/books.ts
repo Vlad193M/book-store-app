@@ -1,3 +1,4 @@
+import 'server-only';
 import { db } from '../db';
 
 export async function getBookPageData(bookId: string) {
@@ -27,7 +28,7 @@ export async function getBookPageData(bookId: string) {
   return book;
 }
 
-type getBooksBySimilarCategoriesBaseParams = {
+type getBooksBaseParams = {
   take?: number;
   order?: 'asc' | 'desc';
 };
@@ -36,11 +37,11 @@ type getBooksBySimilarCategoriesParams =
   | ({
       bookId: string;
       bookIds?: never;
-    } & getBooksBySimilarCategoriesBaseParams)
+    } & getBooksBaseParams)
   | ({
       bookId?: never;
       bookIds: string[];
-    } & getBooksBySimilarCategoriesBaseParams);
+    } & getBooksBaseParams);
 
 export async function getBooksBySimilarCategories({
   bookId,
@@ -59,9 +60,7 @@ export async function getBooksBySimilarCategories({
 
   if (bookCategories.length === 0) return [];
 
-  const arrayCategoryId = [
-    ...new Set(bookCategories.map((c) => c.categoryId)),
-  ];
+  const arrayCategoryId = [...new Set(bookCategories.map((c) => c.categoryId))];
 
   const similarBooks = await db.book.findMany({
     include: {
@@ -88,4 +87,25 @@ export async function getBooksBySimilarCategories({
   });
 
   return similarBooks;
+}
+
+export async function getTopStockBooks({
+  take = 4,
+  order = 'desc',
+}: getBooksBaseParams = {}) {
+  const highestQuantityBooks = await db.book.findMany({
+    include: {
+      bookCategories: true,
+      inventory: true,
+      bookImages: true,
+    },
+    orderBy: {
+      inventory: {
+        quantity: order,
+      },
+    },
+    take,
+  });
+
+  return highestQuantityBooks;
 }

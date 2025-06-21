@@ -1,5 +1,5 @@
 import Card from '@/components/Card';
-import { getBooksBySimilarCategories } from '@/lib/db/books';
+import { getBooksBySimilarCategories, getTopStockBooks } from '@/lib/db/books';
 
 interface CartRecommendationsBooksProps {
   bookIds: string[];
@@ -8,18 +8,24 @@ interface CartRecommendationsBooksProps {
 export default async function CartRecommendationsBooks({
   bookIds,
 }: CartRecommendationsBooksProps) {
-  const similarBooks = await getBooksBySimilarCategories({ bookIds });
-  
+  let recommendBooks: Awaited<ReturnType<typeof getTopStockBooks>>;
+
+  if (bookIds.length > 0) {
+    recommendBooks = await getBooksBySimilarCategories({ bookIds });
+  } else {
+    recommendBooks = await getTopStockBooks();
+  }
+
   // await new Promise((res, rej) => {
   //   setTimeout(() => res(""), 5000);
   // });
 
   return (
     <div className='flex flex-wrap gap-8 justify-center'>
-      {similarBooks.map((book) => (
+      {recommendBooks.map((book) => (
         <Card
           key={book.id}
-          id={book.id}
+          bookId={book.id}
           price={book.price}
           title={book.name}
           src={book.bookImages.find((img) => img.isPrimary)?.imageUrl ?? ''}

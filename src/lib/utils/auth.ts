@@ -1,10 +1,11 @@
+import 'server-only';
 import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '../db';
 
 export async function verifyAuth(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
-
+// console.log('verifyAuth all:', request.cookies);
   if (!token) {
     return NextResponse.json({ error: 'No token provided' }, { status: 401 });
   }

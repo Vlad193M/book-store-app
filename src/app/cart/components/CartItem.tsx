@@ -1,13 +1,16 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
+import useDeleteCartItem from '@/hooks/useDeleteCartItem';
+import UseUpdateCartItem from '@/hooks/useUpdateCartItem';
 import { addButton, diagonalArrow, removeButton } from '@/lib/constants/icons';
 
 interface CartItemRowProps {
   title: string;
   price: number;
   count: number;
-  src: StaticImageData;
+  src: string;
   isLast: boolean;
+  bookId: string;
 }
 
 export default function CartItemRow({
@@ -16,27 +19,18 @@ export default function CartItemRow({
   count,
   src,
   isLast,
+  bookId,
 }: CartItemRowProps) {
+  const { updateItem } = UseUpdateCartItem();
+  const { deleteItem } = useDeleteCartItem();
+
   const tdBorderClass = isLast ? 'border-b-0' : 'border-b border-[#DEDFE1]';
-
-  async function handleDelete() {
-    const response = await fetch(
-      'http://localhost:3000/api/cart/item/73483423842834',{
-        method: "DELETE"
-      }
-    );
-
-    const body = await response.json();
-
-    console.log(response, body);
-  }
-
   return (
     <tr>
       <td className={`${tdBorderClass} px-2 md:px-4 py-0`}>
         <div className='flex items-center gap-2 md:gap-[16px]'>
           <button
-            onClick={handleDelete}
+            onClick={() => deleteItem(bookId)}
             className='shrink-0 w-[10px] h-[10px] md:w-[12px] md:h-[12px] relative'
           >
             <Image
@@ -63,13 +57,21 @@ export default function CartItemRow({
 
       <td className={`${tdBorderClass} px-2 md:px-4 py-4 md:py-6`}>
         <div className='mx-auto w-[90px] md:w-[108px] flex px-2 py-1 md:px-4 md:py-3 items-center justify-between rounded-[104px] border border-[#D7D7D7]'>
-          <button>
+          <button
+            onClick={() => {
+              updateItem(bookId, count - 1);
+            }}
+          >
             <Image src={removeButton} alt='remove book' />
           </button>
           <span className='text-[#414141] font-bold text-[14px] md:text-[16px]'>
             {count}
           </span>
-          <button>
+          <button
+            onClick={() => {
+              updateItem(bookId, count + 1);
+            }}
+          >
             <Image src={addButton} alt='add book' />
           </button>
         </div>
