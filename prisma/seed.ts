@@ -963,7 +963,7 @@ async function main() {
       prisma.bookImage.create({
         data: {
           bookId: books[7].id,
-          imageUrl: '/books/book_8.jpg',
+          imageUrl: '/books/fellowship_ring_1.jpg',
           isPrimary: true,
         },
       }),
@@ -974,18 +974,11 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[7].id,
-          imageUrl: '/books/fellowship_ring_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // And Then There Were None
       prisma.bookImage.create({
         data: {
           bookId: books[8].id,
-          imageUrl: '/books/book_9.jpg',
+          imageUrl: '/books/and_then_none_1.jpg',
           isPrimary: true,
         },
       }),
@@ -996,32 +989,46 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[8].id,
-          imageUrl: '/books/and_then_none_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // It
       prisma.bookImage.create({
         data: {
           bookId: books[9].id,
-          imageUrl: '/books/book_10.jpg',
+          imageUrl: '/books/it_1.jpg',
           isPrimary: true,
         },
       }),
       prisma.bookImage.create({
         data: {
           bookId: books[9].id,
-          imageUrl: '/books/it_2.jpg',
+          imageUrl: '/books/it_2.png',
           isPrimary: false,
         },
       }),
       prisma.bookImage.create({
         data: {
           bookId: books[9].id,
-          imageUrl: '/books/it_3.jpg',
+          imageUrl: '/books/it_3.png',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[9].id,
+          imageUrl: '/books/it_4.png',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[9].id,
+          imageUrl: '/books/it_5.png',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[9].id,
+          imageUrl: '/books/it_6.png',
           isPrimary: false,
         },
       }),
@@ -1040,13 +1047,6 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[10].id,
-          imageUrl: '/books/pride_prejudice_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // Sense and Sensibility
       prisma.bookImage.create({
         data: {
@@ -1062,13 +1062,6 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[11].id,
-          imageUrl: '/books/sense_sensibility_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // Harry Potter and the Prisoner of Azkaban
       prisma.bookImage.create({
         data: {
@@ -1081,13 +1074,6 @@ async function main() {
         data: {
           bookId: books[12].id,
           imageUrl: '/books/hp_prisoner_azkaban_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[12].id,
-          imageUrl: '/books/hp_prisoner_azkaban_3.jpg',
           isPrimary: false,
         },
       }),
@@ -1113,26 +1099,33 @@ async function main() {
           isPrimary: false,
         },
       }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_4.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_5.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[13].id,
+          imageUrl: '/books/silmarillion_6.jpg',
+          isPrimary: false,
+        },
+      }),
       // Carrie
       prisma.bookImage.create({
         data: {
           bookId: books[14].id,
           imageUrl: '/books/carrie_1.jpg',
           isPrimary: true,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[14].id,
-          imageUrl: '/books/carrie_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[14].id,
-          imageUrl: '/books/carrie_3.jpg',
-          isPrimary: false,
         },
       }),
       // American Gods
@@ -1157,19 +1150,40 @@ async function main() {
           isPrimary: false,
         },
       }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_4.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_5.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_6.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[15].id,
+          imageUrl: '/books/american_gods_7.jpg',
+          isPrimary: false,
+        },
+      }),
       // Beloved
       prisma.bookImage.create({
         data: {
           bookId: books[16].id,
           imageUrl: '/books/beloved_1.jpg',
           isPrimary: true,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[16].id,
-          imageUrl: '/books/beloved_2.jpg',
-          isPrimary: false,
         },
       }),
       // Norwegian Wood
@@ -1187,18 +1201,11 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[17].id,
-          imageUrl: '/books/norwegian_wood_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // The Handmaid’s Tale
       prisma.bookImage.create({
         data: {
           bookId: books[18].id,
-          imageUrl: '/books/handmaids_tale_1.jpg',
+          imageUrl: '/books/handmaids_tale_1.webp',
           isPrimary: true,
         },
       }),
@@ -1206,13 +1213,6 @@ async function main() {
         data: {
           bookId: books[18].id,
           imageUrl: '/books/handmaids_tale_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[18].id,
-          imageUrl: '/books/handmaids_tale_3.jpg',
           isPrimary: false,
         },
       }),
@@ -1231,13 +1231,6 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[19].id,
-          imageUrl: '/books/hp_goblet_fire_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // A Storm of Swords
       prisma.bookImage.create({
         data: {
@@ -1250,13 +1243,6 @@ async function main() {
         data: {
           bookId: books[20].id,
           imageUrl: '/books/storm_of_swords_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[20].id,
-          imageUrl: '/books/storm_of_swords_3.jpg',
           isPrimary: false,
         },
       }),
@@ -1275,13 +1261,6 @@ async function main() {
           isPrimary: false,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[21].id,
-          imageUrl: '/books/two_towers_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // Death on the Nile
       prisma.bookImage.create({
         data: {
@@ -1290,39 +1269,32 @@ async function main() {
           isPrimary: true,
         },
       }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[22].id,
-          imageUrl: '/books/death_nile_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[22].id,
-          imageUrl: '/books/death_nile_3.jpg',
-          isPrimary: false,
-        },
-      }),
       // Salem’s Lot
       prisma.bookImage.create({
         data: {
           bookId: books[23].id,
-          imageUrl: '/books/salems_lot_1.jpg',
+          imageUrl: '/books/salems_lot_1.png',
           isPrimary: true,
         },
       }),
       prisma.bookImage.create({
         data: {
           bookId: books[23].id,
-          imageUrl: '/books/salems_lot_2.jpg',
+          imageUrl: '/books/salems_lot_2.png',
           isPrimary: false,
         },
       }),
       prisma.bookImage.create({
         data: {
           bookId: books[23].id,
-          imageUrl: '/books/salems_lot_3.jpg',
+          imageUrl: '/books/salems_lot_3.png',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[23].id,
+          imageUrl: '/books/salems_lot_4.png',
           isPrimary: false,
         },
       }),
@@ -1332,20 +1304,6 @@ async function main() {
           bookId: books[24].id,
           imageUrl: '/books/emma_1.jpg',
           isPrimary: true,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[24].id,
-          imageUrl: '/books/emma_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[24].id,
-          imageUrl: '/books/emma_3.jpg',
-          isPrimary: false,
         },
       }),
       // Good Omens
@@ -1360,13 +1318,6 @@ async function main() {
         data: {
           bookId: books[25].id,
           imageUrl: '/books/good_omens_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[25].id,
-          imageUrl: '/books/good_omens_3.jpg',
           isPrimary: false,
         },
       }),
@@ -1385,25 +1336,25 @@ async function main() {
           isPrimary: false,
         },
       }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[26].id,
+          imageUrl: '/books/song_of_solomon_3.jpg',
+          isPrimary: false,
+        },
+      }),
       // Kafka on the Shore
       prisma.bookImage.create({
         data: {
           bookId: books[27].id,
-          imageUrl: '/books/kafka_shore_1.jpg',
+          imageUrl: '/books/kafka_shore_1.webp',
           isPrimary: true,
         },
       }),
       prisma.bookImage.create({
         data: {
           bookId: books[27].id,
-          imageUrl: '/books/kafka_shore_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[27].id,
-          imageUrl: '/books/kafka_shore_3.jpg',
+          imageUrl: '/books/kafka_shore_2.webp',
           isPrimary: false,
         },
       }),
@@ -1413,20 +1364,6 @@ async function main() {
           bookId: books[28].id,
           imageUrl: '/books/oryx_crake_1.jpg',
           isPrimary: true,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[28].id,
-          imageUrl: '/books/oryx_crake_2.jpg',
-          isPrimary: false,
-        },
-      }),
-      prisma.bookImage.create({
-        data: {
-          bookId: books[28].id,
-          imageUrl: '/books/oryx_crake_3.jpg',
-          isPrimary: false,
         },
       }),
       // Neverwhere
@@ -1447,7 +1384,21 @@ async function main() {
       prisma.bookImage.create({
         data: {
           bookId: books[29].id,
-          imageUrl: '/books/neverwhere_3.jpg',
+          imageUrl: '/books/neverwhere_4.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[29].id,
+          imageUrl: '/books/neverwhere_5.jpg',
+          isPrimary: false,
+        },
+      }),
+      prisma.bookImage.create({
+        data: {
+          bookId: books[29].id,
+          imageUrl: '/books/neverwhere_6.jpg',
           isPrimary: false,
         },
       }),
@@ -1461,8 +1412,8 @@ async function main() {
             bookId: book.id,
             quantity: 30 + index * 3, // 30 to 117 books in stock
           },
-        })
-      )
+        }),
+      ),
     );
 
     // Create Carts
@@ -1691,7 +1642,7 @@ async function main() {
     ]);
   });
   console.log(
-    'Database seeded with 30 books, multiple orders, and an average of 3 images per book successfully!'
+    'Database seeded with 30 books, multiple orders, and an average of 3 images per book successfully!',
   );
 }
 
