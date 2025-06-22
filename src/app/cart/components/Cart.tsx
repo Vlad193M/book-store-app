@@ -7,6 +7,8 @@ import CartItem from './CartItem';
 export default function Cart() {
   const { data } = useQuery(cartApi.getCartOptions());
 
+  console.log(data?.cartItems, 'cart items');
+
   return (
     <div className='lg:flex-[0_1_718px] rounded-[10px]  border border-[#DEDFE1]'>
       <table className='w-full table-auto border-separate border-spacing-0'>

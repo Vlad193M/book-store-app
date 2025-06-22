@@ -51,6 +51,7 @@ export default async function Page({
       <section className='container mb-10 flex flex-col lg:flex-row lg:gap-5 md:gap-14 gap-5 justify-between items-center'>
         <ImagesSwapper bookImages={book.bookImages} bookName={book.name} />
         <Info
+        bookId={book.id}
           title={book.name}
           price={book.price}
           description={book.description ?? ''}

@@ -3,6 +3,7 @@
 import useAddCartItem from '@/hooks/useAddCartItem';
 import Image from 'next/image';
 import Link from 'next/link';
+import { log } from 'node:console';
 
 interface CardProps {
   bookId: string;

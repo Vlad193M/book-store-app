@@ -1,3 +1,7 @@
+"use client";
+
+import { cartApi } from '@/lib/api/cart';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,6 +13,12 @@ const navItems = [
 ];
 
 export default function Header() {
+  const { data } = useQuery(cartApi.getCartOptions());
+
+  const count =
+    data?.cartItems.reduce((acc, item) => acc + item.quantity, 0) ??
+    0;
+
   return (
     <header className='container flex justify-between gap-8 py-10 mx-auto w-full'>
       <Link href='/' className='relative w-14 h-6 sm:w-16 sm:h-7'>
@@ -42,7 +52,15 @@ export default function Header() {
             alt='Dropdown Arrow'
           />
         </Link>
-        <Link href='/cart'>
+        <Link
+          href='/cart'
+          className='relative w-6 h-6 flex items-center justify-center'
+        >
+          {count > 0 && (
+            <span className='absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-semibold w-5 h-5 flex items-center justify-center rounded-full shadow-md'>
+              {count}
+            </span>
+          )}
           <Image
             width={24}
             height={24}

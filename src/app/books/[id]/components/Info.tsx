@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
+import useAddCartItem from '@/hooks/useAddCartItem';
 import {
   addButton,
   delivery,
@@ -10,8 +13,10 @@ import {
   rotateBox,
   star,
 } from '@/lib/constants/icons';
+import { useState } from 'react';
 
 interface InfoProps {
+  bookId: string;
   title: string;
   price: number;
   description: string;
@@ -20,12 +25,17 @@ interface InfoProps {
 }
 
 export default function Info({
+  bookId,
   title,
   price,
   description,
   reviewsLength,
   rating,
 }: InfoProps) {
+  const { addItem } = useAddCartItem();
+
+  const [count, setCount] = useState(1);
+
   return (
     <div className='self-start w-full lg:flex-[0_1_500px]'>
       <div className='flex justify-between mb-3'>
@@ -65,16 +75,22 @@ export default function Info({
       </div>
       <div className='flex gap-4 mb-[15px]'>
         <div className='max-w-[128px] w-full grow flex px-6 py-4 items-center justify-between rounded-[104px] border border-[#D7D7D7]'>
-          <button>
+          <button onClick={() => setCount((prev) => Math.max(prev - 1, 0))}>
             <Image src={removeButton} alt='remove book' />
           </button>
-          <span>1</span>
-          <button>
+          <span>{count}</span>
+          <button onClick={() => setCount((prev) => prev + 1)}>
             <Image src={addButton} alt='add book' />
           </button>
         </div>
 
-        <button className='px-6 py-4 bg-[#282828] text-[18px] font-bold text-white text-center rounded-[104px] grow leading-none'>
+        <button
+          onClick={() => {
+            addItem(bookId, count);
+            setCount(1);
+          }}
+          className='px-6 py-4 bg-[#282828] text-[18px] font-bold text-white text-center rounded-[104px] grow leading-none'
+        >
           Add to Cart
         </button>
       </div>

@@ -14,7 +14,7 @@ export default async function Page() {
 
   const token = cookieStore.get('token')?.value;
 
-  let cartData;
+  let cartData: Awaited<ReturnType<typeof cartApi.getCart>> | null = null;
 
   const queryClient = getQueryClient();
   try {
@@ -38,7 +38,6 @@ export default async function Page() {
   if (!cartData) {
     return <p>No cart data</p>;
   }
-
   const booksId = cartData.cartItems.map((cartItem) => cartItem.bookId);
 
   return (

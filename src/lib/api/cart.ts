@@ -33,7 +33,7 @@ export const cartApi = {
     bookId: string;
     quantity: number;
   }) => {
-    const response = await fetch(`api/cart`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const cartApi = {
     bookId: string;
     quantity: number;
   }) => {
-    const response = await fetch(`api/cart/item/${bookId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/item/${bookId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export const cartApi = {
   },
 
   deleteCartItem: async ({ bookId }: { bookId: string }) => {
-    const response = await fetch(`api/cart/item/${bookId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/item/${bookId}`, {
       method: 'DELETE',
     });
 

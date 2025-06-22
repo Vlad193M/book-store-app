@@ -3,6 +3,7 @@ import Image from 'next/image';
 import useDeleteCartItem from '@/hooks/useDeleteCartItem';
 import UseUpdateCartItem from '@/hooks/useUpdateCartItem';
 import { addButton, diagonalArrow, removeButton } from '@/lib/constants/icons';
+import Link from 'next/link';
 
 interface CartItemRowProps {
   title: string;
@@ -40,12 +41,14 @@ export default function CartItemRow({
               fill
             />
           </button>
-          <div className='shrink-0 relative w-[30px] h-[42px] md:w-[40px] md:h-[58px] bg-[#d9d9d9] rounded-[5px] overflow-hidden'>
-            <Image src={src} alt='Book image' fill className='object-cover' />
-          </div>
-          <p className='text-[14px] md:text-[16px] text-[#3d3d3d] leading-[20px]'>
-            {title}
-          </p>
+          <Link href={`/books/${bookId}`} className='flex items-center gap-2 md:gap-[16px]'>
+            <div className='shrink-0 relative w-[30px] h-[42px] md:w-[40px] md:h-[58px] bg-[#d9d9d9] rounded-[5px] overflow-hidden'>
+              <Image src={src} alt='Book image' fill className='object-cover' />
+            </div>
+            <p className='text-[14px] md:text-[16px] text-[#3d3d3d] leading-[20px]'>
+              {title}
+            </p>
+          </Link>
         </div>
       </td>
 
