@@ -14,22 +14,26 @@ export default async function Page() {
 
   const token = cookieStore.get('token')?.value;
 
-  if (!token) {
-    redirect('login');
-  }
+  let cartData;
 
   const queryClient = getQueryClient();
-
-  const cartData = await queryClient.fetchQuery({
-    queryKey: [cartApi.baseKey],
-    queryFn: (meta) =>
-      cartApi.getCart(meta, {
-        cache: 'no-store',
-        headers: {
-          Cookie: `token=${token};`,
-        },
-      }),
-  });
+  try {
+    cartData = await queryClient.fetchQuery({
+      queryKey: [cartApi.baseKey],
+      queryFn: (meta) =>
+        cartApi.getCart(meta, {
+          cache: 'no-store',
+          headers: {
+            Cookie: `token=${token};`,
+          },
+        }),
+    });
+  } catch (error: any) {
+    console.log(error.message, 'message');
+    if (error.message === 'Failed to fetch cart: 401 Unauthorized') {
+      return redirect('/login');
+    }
+  }
 
   if (!cartData) {
     return <p>No cart data</p>;

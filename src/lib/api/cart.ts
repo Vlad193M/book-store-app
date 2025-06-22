@@ -18,6 +18,10 @@ export const cartApi = {
       signal,
     });
 
+    if (!response.ok) {
+      throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
+    }
+
     const cartData = (await response.json()) as CartDataType;
     return cartData;
   },
@@ -40,6 +44,10 @@ export const cartApi = {
       }),
     });
 
+    if (!response.ok) {
+      throw new Error(`Failed to add cart item: ${response.status} ${response.statusText}`);
+    }
+
     const body = await response.json();
     return body;
   },
@@ -61,6 +69,10 @@ export const cartApi = {
       }),
     });
 
+    if (!response.ok) {
+      throw new Error(`Failed to update cart item: ${response.status} ${response.statusText}`);
+    }
+
     const body = await response.json();
     return body;
   },
@@ -69,6 +81,10 @@ export const cartApi = {
     const response = await fetch(`api/cart/item/${bookId}`, {
       method: 'DELETE',
     });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete cart item: ${response.status} ${response.statusText}`);
+    }
 
     const body = await response.json();
     return body;

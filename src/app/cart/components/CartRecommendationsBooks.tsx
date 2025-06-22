@@ -8,7 +8,7 @@ interface CartRecommendationsBooksProps {
 export default async function CartRecommendationsBooks({
   bookIds,
 }: CartRecommendationsBooksProps) {
-  let recommendBooks: Awaited<ReturnType<typeof getTopStockBooks>>;
+  let recommendBooks;
 
   if (bookIds.length > 0) {
     recommendBooks = await getBooksBySimilarCategories({ bookIds });
