@@ -25,24 +25,35 @@ export default function ImagesSwapper({
   const { setSwiper, slideTo, activeIndex } = useSwiperController();
 
   return (
-    <div className='self-stretch justify-center flex gap-5 lg:flex-[0_1_670px] lg:justify-between'>
+    <div className='self-stretch md:min-h-[602px] justify-center flex gap-5 lg:flex-[0_1_670px] lg:justify-between'>
       <div className='hidden md:flex flex-col gap-2'>
-        {bookImages.slice(0, 3).map((image, index) => (
-          <div
-            key={image.id}
-            onClick={() => slideTo(index)}
-            className={`flex rounded-[2px] overflow-hidden bg-gray-100 relative h-[195px] w-[142px] cursor-pointer ${
-              activeIndex === index ? 'border-[#a6a6a6]' : 'border-transparent'
-            } border-2`}
-          >
-            <Image
-              src={image.imageUrl ?? ''}
-              alt='book image'
-              fill
-              className='object-contain'
-            />
-          </div>
-        ))}
+        {bookImages
+          .slice(
+            Math.floor(activeIndex / 3) === 0
+              ? 0
+              : Math.floor(activeIndex / 3) * 3,
+            Math.floor(activeIndex / 3) === 0
+              ? 3
+              : Math.floor(activeIndex / 3) * 3 + 3,
+          )
+          .map((image, index) => (
+            <div
+              key={image.id}
+              onClick={() => slideTo(index)}
+              className={`flex rounded-[2px] overflow-hidden bg-gray-100 relative h-[195px] w-[142px] cursor-pointer ${
+                activeIndex === index + Math.floor(activeIndex / 3) * 3
+                  ? 'border-[#a6a6a6]'
+                  : 'border-transparent'
+              } border-2`}
+            >
+              <Image
+                src={image.imageUrl ?? ''}
+                alt='book image'
+                fill
+                className='object-contain'
+              />
+            </div>
+          ))}
       </div>
 
       <div className='group grow w-full max-w-[500px] flex flex-col items-center'>

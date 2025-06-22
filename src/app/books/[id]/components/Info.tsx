@@ -27,7 +27,7 @@ export default function Info({
   rating,
 }: InfoProps) {
   return (
-    <div className='self-start w-full max-w-[800px] lg:flex-[0_1_500px]'>
+    <div className='self-start w-full lg:flex-[0_1_500px]'>
       <div className='flex justify-between mb-3'>
         <h1 className='text-[#2D2D2D] text-[26px] font-bold leading-none '>
           {title}

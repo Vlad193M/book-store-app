@@ -5,7 +5,6 @@ interface DescriptionProps {
 }
 
 export default function Description({ descriptionData }: DescriptionProps) {
-  console.log('descriptionData', descriptionData);
   return (
     <section className=''>
       <h3 className='text-[#696969] text-xl leading-8 font-bold'>Annotation</h3>

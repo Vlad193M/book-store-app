@@ -17,7 +17,7 @@ export default async function SimilarBooks({ bookId }: SimilarBooksProps) {
         {similarBooks.map((book) => (
           <Card
             key={book.id}
-            id={book.id}
+            bookId={book.id}
             price={book.price}
             title={book.name}
             src={

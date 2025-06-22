@@ -1,5 +1,6 @@
 import Card from '@/components/Card';
 import { getBooksBySimilarCategories, getTopStockBooks } from '@/lib/db/books';
+import { log } from 'console';
 
 interface CartRecommendationsBooksProps {
   bookIds: string[];
