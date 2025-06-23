@@ -109,3 +109,13 @@ export async function getTopStockBooks({
 
   return highestQuantityBooks;
 }
+
+export async function getUserCartBookIds(userId: string): Promise<string[]> {
+  const cart = await db.cart.findUnique({
+    where: { userId },
+    select: {
+      cartItems: { select: { bookId: true } },
+    },
+  });
+  return cart?.cartItems.map((item) => item.bookId) ?? [];
+}

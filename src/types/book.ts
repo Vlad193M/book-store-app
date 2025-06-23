@@ -56,3 +56,11 @@ export type CartDataType = Prisma.CartGetPayload<{
     };
   };
 }>;
+
+export type RecommendedBooksType = Prisma.BookGetPayload<{
+  include: {
+    bookCategories: true;
+    inventory: true;
+    bookImages: true;
+  };
+}>;
