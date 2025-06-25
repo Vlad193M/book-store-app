@@ -1,5 +1,5 @@
 import { Prisma } from '@/generated/prisma';
-import { getBookPageData } from '@/lib/db/books';
+import { getBookPageData } from '@/lib/db/books/getBookPageData';
 
 // export type BookPageDataType = Prisma.BookGetPayload<{
 //   include: {
@@ -70,4 +70,3 @@ export type RecommendedBooksType = Prisma.BookGetPayload<{
     bookImages: true;
   };
 }>;
-
