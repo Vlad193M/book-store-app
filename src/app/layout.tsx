@@ -1,13 +1,13 @@
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata } from 'next';
 import { Oxygen } from 'next/font/google';
+import { cookies } from 'next/headers';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import Header from '@/components/Header';
-import { getQueryClient } from '@/lib/utils/get-query-client';
+import { getQueryClient } from '@/lib/utils/getQueryClient';
 import { prefetchInitialData } from '@/lib/utils/prefetchData';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { cookies } from 'next/headers';
 import './globals.css';
 import Providers from './providers';
 

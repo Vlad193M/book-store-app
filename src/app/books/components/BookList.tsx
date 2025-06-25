@@ -4,13 +4,12 @@ import Card from '@/components/Card';
 import { bookApi } from '@/lib/api/book';
 import { useQuery } from '@tanstack/react-query';
 
-export default function CartRecommendationsBooks() {
-  const { data } = useQuery(bookApi.getRecommendedBooksOptions());
-  
+export default function BookList() {
+  const { data } = useQuery(bookApi.getBooksOptions());
   return (
-    <div className='flex flex-wrap gap-8 justify-center'>
+    <div className='flex flex-wrap gap-x-8 gap-y-16 justify-center'>
       {data &&
-        data?.map((book) => (
+        data.map((book) => (
           <Card
             key={book.id}
             bookId={book.id}

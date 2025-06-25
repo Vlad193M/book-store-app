@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 
 import { arrowRight } from '@/lib/constants/icons';
-import { getBookPageData } from '@/lib/db/books';
 import { extractDescriptionData } from '@/lib/utils/bookDataTransform';
 import ListRecommendedBooksSkeleton from '../../../components/ListRecommendedBooksSkeleton';
 import Details from './components/Details';
 import ImagesSwapper from './components/ImagesSwapper';
 import Info from './components/Info';
 import SimilarBooks from './components/SimilarBooks';
+import { getBookPageData } from '@/lib/db/books/getBookPageData';
 
 export default async function Page({
   params,
@@ -26,7 +26,7 @@ export default async function Page({
 
   const averageRating = Math.round(
     book.reviews.reduce((acc, review) => acc + review.rating, 0) /
-      book.reviews.length || 0
+      book.reviews.length || 0,
   );
 
   return (
@@ -51,7 +51,7 @@ export default async function Page({
       <section className='container mb-10 flex flex-col lg:flex-row lg:gap-5 md:gap-14 gap-5 justify-between items-center'>
         <ImagesSwapper bookImages={book.bookImages} bookName={book.name} />
         <Info
-        bookId={book.id}
+          bookId={book.id}
           title={book.name}
           price={book.price}
           description={book.description ?? ''}

@@ -57,6 +57,12 @@ export type CartDataType = Prisma.CartGetPayload<{
   };
 }>;
 
+export type BooksType = Prisma.BookGetPayload<{
+  include: {
+    bookImages: true;
+  };
+}>;
+
 export type RecommendedBooksType = Prisma.BookGetPayload<{
   include: {
     bookCategories: true;
@@ -64,3 +70,4 @@ export type RecommendedBooksType = Prisma.BookGetPayload<{
     bookImages: true;
   };
 }>;
+

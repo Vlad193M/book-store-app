@@ -6,8 +6,6 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ bookId: string }> }
 ) {
-  // console.log('Runtime:', process.env.NEXT_RUNTIME);
-
   const authResult = await verifyAuth(request);
 
   if (authResult instanceof NextResponse) {

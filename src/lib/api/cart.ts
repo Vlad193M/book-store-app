@@ -2,6 +2,11 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 import { CartDataType } from '@/types/book';
 import { queryOptions } from '@tanstack/react-query';
 
+type GetCartParams = {
+  signal?: AbortSignal;
+  init?: RequestInit;
+};
+
 export const cartApi = {
   baseKey: 'cart',
 
@@ -12,14 +17,18 @@ export const cartApi = {
     });
   },
 
-  getCart: async ({ signal }: { signal: AbortSignal }, init?: RequestInit) => {
+  getCart: async (params: GetCartParams = {}) => {
+    const { signal, init } = params;
+
     const response = await fetch(`${API_BASE_URL}/api/cart`, {
       ...init,
       signal,
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch cart: ${response.status} ${response.statusText}`,
+      );
     }
 
     const cartData = (await response.json()) as CartDataType;
@@ -45,7 +54,9 @@ export const cartApi = {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to add cart item: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to add cart item: ${response.status} ${response.statusText}`,
+      );
     }
 
     const body = await response.json();
@@ -70,7 +81,9 @@ export const cartApi = {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to update cart item: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to update cart item: ${response.status} ${response.statusText}`,
+      );
     }
 
     const body = await response.json();
@@ -83,7 +96,9 @@ export const cartApi = {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to delete cart item: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to delete cart item: ${response.status} ${response.statusText}`,
+      );
     }
 
     const body = await response.json();

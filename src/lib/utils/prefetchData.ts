@@ -18,12 +18,14 @@ export async function prefetchInitialData(
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: [cartApi.baseKey],
-      queryFn: (meta) => cartApi.getCart(meta, headers),
+      queryFn: (meta) =>
+        cartApi.getCart({ signal: meta.signal, init: headers }),
     }),
 
     queryClient.prefetchQuery({
-      queryKey: bookApi.getRecommendedOptions().queryKey,
-      queryFn: (meta) => bookApi.getRecommendedBooks(meta, headers),
+      queryKey: bookApi.getRecommendedBooksOptions().queryKey,
+      queryFn: (meta) =>
+        bookApi.getRecommendedBooks({ signal: meta.signal, init: headers }),
     }),
   ]);
 }

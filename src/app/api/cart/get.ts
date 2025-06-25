@@ -3,8 +3,6 @@ import { verifyAuth } from '@/lib/utils/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  // console.log('Runtime:', process.env.NEXT_RUNTIME);
-
   const authResult = await verifyAuth(request);
   if (authResult instanceof NextResponse) {
     return authResult;

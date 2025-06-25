@@ -1,30 +1,28 @@
 import Card from '@/components/Card';
-import { getBooksBySimilarCategories } from '@/lib/db/books';
+import { getBooksBySimilarCategories } from '@/lib/db/books/getBooksBySimilarCategories';
 
 interface SimilarBooksProps {
   bookId: string;
 }
 
 export default async function SimilarBooks({ bookId }: SimilarBooksProps) {
-  const similarBooks = await getBooksBySimilarCategories({ bookId});
+  const similarBooks = await getBooksBySimilarCategories({ bookId });
 
   // await new Promise((res, rej) => {
   //   setTimeout(() => res(""), 5000);
   // });
 
   return (
-      <div className='flex flex-wrap gap-8 justify-center'>
-        {similarBooks.map((book) => (
-          <Card
-            key={book.id}
-            bookId={book.id}
-            price={book.price}
-            title={book.name}
-            src={
-              book.bookImages.find((img) => img.isPrimary)?.imageUrl ?? ''
-            }
-          />
-        ))}
-      </div>
+    <div className='flex flex-wrap gap-8 justify-center'>
+      {similarBooks.map((book) => (
+        <Card
+          key={book.id}
+          bookId={book.id}
+          price={book.price}
+          title={book.name}
+          src={book.bookImages.find((img) => img.isPrimary)?.imageUrl ?? ''}
+        />
+      ))}
+    </div>
   );
 }

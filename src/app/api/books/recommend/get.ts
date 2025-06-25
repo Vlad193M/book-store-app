@@ -1,8 +1,6 @@
-import {
-  getBooksBySimilarCategories,
-  getTopStockBooks,
-  getUserCartBookIds,
-} from '@/lib/db/books';
+import { getBooksBySimilarCategories } from '@/lib/db/books/getBooksBySimilarCategories';
+import { getTopStockBooks } from '@/lib/db/books/getTopStockBooks';
+import { getUserCartBookIds } from '@/lib/db/cart/getUserCartBookIds';
 import { verifyAuth } from '@/lib/utils/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
