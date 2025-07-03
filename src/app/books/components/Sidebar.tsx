@@ -1,71 +1,56 @@
 'use client';
 
 import { Category } from '@/generated/prisma';
-import Image from 'next/image';
-import { useMemo, useState } from 'react';
-
-const searchChildCategories = (categories: Category[], id: string) => {
-  return categories.filter((category) => category.parentId === id);
-};
+import { useSidebarFormSubmit } from '@/hooks/useSidebarFormSubmit';
+import { buildCategoryTree } from '@/lib/utils/BuildCategoryTree';
+import { markSelected } from '@/lib/utils/markSelected';
+import { searchParamsToObject } from '@/lib/utils/searchParamsToObject';
+import { useSearchParams } from 'next/navigation';
+import BookFormatFilter from './BookFormatFilter';
+import CategoryFilter from './CategoryFilter';
+import PriceFilter from './PriceFilter';
 
 interface SidebarProps {
   categories: Category[];
 }
 
-interface ChildCategoriesState {
-  parentId: string;
-  categoriesArray: Category[];
-}
-
 export default function Sidebar({ categories }: SidebarProps) {
-  const [childCategories, setChildCategories] =
-    useState<ChildCategoriesState>();
-
-  const parentCategories = useMemo(
-    () => categories.filter((category) => !category.parentId),
-    [categories],
+  const searchParams = useSearchParams();
+  const searchParamsObj = searchParamsToObject(searchParams);
+  const categoryTree = buildCategoryTree(categories).map((category) =>
+    markSelected(category, searchParamsObj['categoryIds'] ?? []),
   );
 
-  function handleChildCategories(id: string) {
-    if (id === childCategories?.parentId) {
-      setChildCategories(undefined);
-      return;
-    }
+  const handleSubmit = useSidebarFormSubmit(categoryTree);
 
-    const searchedChildCategories = searchChildCategories(categories, id);
-    setChildCategories({
-      parentId: id,
-      categoriesArray: searchedChildCategories,
-    });
-  }
-
-  console.log(categories);
   return (
-    <aside className='border px-[30px] py-10 max-w-[286px] w-full h-fit'>
-      <div className='flex gap-4'>
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col border px-[30px] py-10 max-w-[286px] w-full h-fit gap-3'
+    >
+      <div className='flex gap-3'>
         <div className='bg-black w-0.5 h-6'></div>
-        <h3 className='mb-6 leading-tight text-[22px]'>Categories</h3>
+        <h2 className='reading-tight text-[22px]'>Filter</h2>
       </div>
-      {parentCategories.map((category) => (
-        <div key={category.id}>
-          <div className='flex justify-between'>
-            <button>{category.name}</button>
-            <Image
-              src='/arrow-down.svg'
-              alt='children categories'
-              width={20}
-              height={20}
-              onClick={() => handleChildCategories(category.id)}
-            />
-          </div>
-          {childCategories?.parentId === category.id &&
-            childCategories.categoriesArray.map((childCategory) => (
-              <p className='ml-2' key={childCategory.id}>
-                <button>{childCategory.name}</button>
-              </p>
-            ))}
-        </div>
-      ))}
-    </aside>
+
+      <CategoryFilter categoryTree={categoryTree} />
+      <BookFormatFilter initSelectedList={searchParamsObj['bookFormats']} />
+      <PriceFilter
+        initMinPrice={
+          searchParamsObj['minPrice']
+            ? Number(searchParamsObj['minPrice'][0])
+            : undefined
+        }
+        initMaxPrice={
+          searchParamsObj['maxPrice']
+            ? Number(searchParamsObj['maxPrice'][0])
+            : undefined
+        }
+      />
+
+      <button className='bg-black rounded-2xl text-white py-1 px-3 self-end'>
+        Search
+      </button>
+    </form>
   );
 }

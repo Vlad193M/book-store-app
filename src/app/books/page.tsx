@@ -1,4 +1,4 @@
-import Sidebar from '@/app/books/components/Sidebar';
+import { fetchCategories } from '@/lib/db/categories/fetchCategories';
 import { getQueryClient } from '@/lib/utils/getQueryClient';
 import { parseSearchParams } from '@/lib/utils/parseSearchParams';
 import { prefetchBooks } from '@/lib/utils/prefetchBooks';
@@ -6,7 +6,7 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import BookList from './components/BookList';
 import SearchInput from './components/SearchInput';
 import SeeMoreBtn from './components/SeeMoreBtn';
-import { fetchCategories } from '@/lib/db/categories/fetchCategories';
+import Sidebar from './components/Sidebar';
 
 export default async function Page({
   searchParams,
