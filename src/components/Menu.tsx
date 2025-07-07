@@ -4,7 +4,7 @@ import NavItem from './NavItem';
 
 const navItems = [
   { href: '/', name: 'Home' },
-  { href: '/', name: 'Login' },
+  { href: '/login', name: 'Login' },
   { href: '/cart', name: 'Cart' },
   { href: '/books', name: 'Books' },
   { href: '/contact', name: 'Contact Us' },

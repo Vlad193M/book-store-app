@@ -90,7 +90,7 @@ export default function Header() {
         {open && (
           <div
             onClick={() => setOpen(false)}
-            className='fixed inset-0 bg-black/10 backdrop-blur-xs z-1'
+            className='fixed inset-0 bg-black/10 backdrop-blur-xs z-2'
           />
         )}
         <Burger open={open} setOpen={setOpen} />

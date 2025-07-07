@@ -17,7 +17,7 @@ export default function Card({ bookId, title, price, src }: CardProps) {
     <div className='flex flex-col gap-3 w-[286px]'>
       <Link
         href={`/books/${bookId}`}
-        className='rounded-[14px] overflow-hidden bg-gray-100 h-[360px] relative z-0'
+        className='rounded-[14px] overflow-hidden bg-gray-100 h-[360px] relative'
       >
         <Image
           src={src}
