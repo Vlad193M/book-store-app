@@ -25,7 +25,7 @@ export default function FilterItemTemplate({
         aria-expanded={isShow}
         aria-controls={`${name}-list`}
       >
-        <h3 className='mb-2 leading-tight text-[18px]'>{title}</h3>
+        <h3 className='mb-2 leading-tight text-[18px] text-left'>{title}</h3>
         <Image
           src='/arrow-down.svg'
           alt={isShow ? `Collapse ${name} formats` : `Expand ${name} formats`}

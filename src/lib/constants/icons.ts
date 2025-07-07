@@ -18,3 +18,4 @@ export { default as star } from '@/../public/star.svg';
 export { default as vercel } from '@/../public/vercel.svg';
 export { default as whiteRightArrow } from '@/../public/white-right-arrow.svg';
 export { default as window } from '@/../public/window.svg';
+export { default as filter } from '@/../public/filter.png';

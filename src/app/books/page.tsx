@@ -4,6 +4,7 @@ import { parseSearchParams } from '@/lib/utils/parseSearchParams';
 import { prefetchBooks } from '@/lib/utils/prefetchBooks';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import BookList from './components/BookList';
+import MobileFilter from './components/MobileFilter';
 import SearchInput from './components/SearchInput';
 import SeeMoreBtn from './components/SeeMoreBtn';
 import Sidebar from './components/Sidebar';
@@ -24,12 +25,13 @@ export default async function Page({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className='container flex gap-8'>
-        <Sidebar categories={categories} />
+        <Sidebar categories={categories} className='hidden md:flex' />
         <main className='grow'>
           <h1 className='font-bold text-2xl lg:text-4xl/tight mb-2 lg:mb-8'>
             Our Collection Of Products
           </h1>
           <SearchInput />
+          <MobileFilter categories={categories} />
           <h2 className='font-bold leading-[1.7]'>
             Showing 1–12 of 24 item(s)
           </h2>

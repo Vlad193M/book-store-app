@@ -36,7 +36,7 @@ export default function Page() {
         <h1 className='text-[#3D3D3D] text-4xl font-bold leading-[45px] mb-4'>
           Login
         </h1>
-        <p className='text-[#949494] leading-5 mb-[52px]'>
+        <p className='text-[#949494] leading-5 mb-[30px]'>
           Do not have an account,{' '}
           <Link href='/signup' className='text-[#2B2B2B] underline'>
             create a new one.

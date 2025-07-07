@@ -36,7 +36,7 @@ export default function Page() {
         <h1 className='text-[#3D3D3D] text-4xl font-bold leading-[45px] mb-4'>
           Signup
         </h1>
-        <p className='text-[#949494] leading-5 mb-[52px]'>
+        <p className='text-[#949494] leading-5 mb-[30px]'>
           Already Have An Account,{' '}
           <Link href='/login' className='text-[#2B2B2B] underline'>
             Login
@@ -44,7 +44,7 @@ export default function Page() {
           .
         </p>
 
-        <div className='flex gap-10 mb-[30px] flex-col md:flex-row'>
+        <div className='flex gap-[30px] mb-[30px] flex-col md:flex-row'>
           <Input
             className='grow'
             id='name'
@@ -62,7 +62,7 @@ export default function Page() {
             type='email'
           />
         </div>
-        <div className='flex gap-10 mb-[30px] flex-col md:flex-row'>
+        <div className='flex gap-[30px] mb-[30px] flex-col md:flex-row'>
           <Input
             className='grow'
             id='password'

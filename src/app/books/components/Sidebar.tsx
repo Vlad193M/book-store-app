@@ -12,9 +12,10 @@ import PriceFilter from './PriceFilter';
 
 interface SidebarProps {
   categories: Category[];
+  className: string;
 }
 
-export default function Sidebar({ categories }: SidebarProps) {
+export default function Sidebar({ categories, className }: SidebarProps) {
   const searchParams = useSearchParams();
   const searchParamsObj = searchParamsToObject(searchParams);
   const categoryTree = buildCategoryTree(categories).map((category) =>
@@ -26,9 +27,9 @@ export default function Sidebar({ categories }: SidebarProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='hidden md:flex flex-col border px-[30px] py-10 max-w-[286px] w-full h-fit gap-3'
+      className={`flex-col border px-[30px] py-10 max-w-[286px] w-full h-fit gap-3 ${className}`}
     >
-      <div className='flex gap-3'>
+      <div className='flex gap-3 items-center'>
         <div className='bg-black w-0.5 h-6'></div>
         <h2 className='reading-tight text-[22px]'>Filter</h2>
       </div>
