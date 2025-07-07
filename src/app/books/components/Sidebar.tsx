@@ -26,7 +26,7 @@ export default function Sidebar({ categories }: SidebarProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col border px-[30px] py-10 max-w-[286px] w-full h-fit gap-3'
+      className='hidden md:flex flex-col border px-[30px] py-10 max-w-[286px] w-full h-fit gap-3'
     >
       <div className='flex gap-3'>
         <div className='bg-black w-0.5 h-6'></div>

@@ -26,12 +26,10 @@ export default async function Page({
       <div className='container flex gap-8'>
         <Sidebar categories={categories} />
         <main className='grow'>
-          <h1 className='font-bold text-4xl/tight mb-8'>
+          <h1 className='font-bold text-2xl lg:text-4xl/tight mb-2 lg:mb-8'>
             Our Collection Of Products
           </h1>
-
           <SearchInput />
-
           <h2 className='font-bold leading-[1.7]'>
             Showing 1–12 of 24 item(s)
           </h2>
@@ -39,9 +37,7 @@ export default async function Page({
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
-          <div className='flex flex-wrap gap-x-8 gap-y-16 justify-center'>
-            <BookList />
-          </div>
+          <BookList />
           <SeeMoreBtn />
         </main>
       </div>

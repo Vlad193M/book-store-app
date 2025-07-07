@@ -1,9 +1,16 @@
-"use client";
+'use client';
 
+import { useCloseOnRouteChange } from '@/hooks/useCloseOnRouteChange';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { cartApi } from '@/lib/api/cart';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRef, useState } from 'react';
+import Burger from './Burger';
+import Menu from './Menu';
+import NavItem from './NavItem';
 
 const navItems = [
   { href: '/', name: 'Home' },
@@ -13,14 +20,19 @@ const navItems = [
 ];
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
   const { data } = useQuery(cartApi.getCartOptions());
+  const node = useRef<HTMLDivElement | null>(null);
+
+  useLockBodyScroll(open);
+  useOnClickOutside(node, () => setOpen(false));
+  useCloseOnRouteChange(() => setOpen(false));
 
   const count =
-    data?.cartItems.reduce((acc, item) => acc + item.quantity, 0) ??
-    0;
+    data?.cartItems.reduce((acc, item) => acc + item.quantity, 0) ?? 0;
 
   return (
-    <header className='container flex justify-between gap-8 py-10 mx-auto w-full'>
+    <header className='container flex z-1 justify-between gap-8 py-10 mx-auto w-full'>
       <Link href='/' className='relative w-14 h-6 sm:w-16 sm:h-7'>
         <Image
           src='/header_icon/logo.svg'
@@ -30,14 +42,19 @@ export default function Header() {
           sizes='(max-width: 640px) 56px, 64px'
         />
       </Link>
-      <nav>
+      <nav className='hidden md:block'>
         <ul className='flex gap-10'>
           {navItems.map((item) => (
-            <NavItem key={item.name} href={item.href} name={item.name} />
+            <NavItem
+              key={item.name}
+              href={item.href}
+              name={item.name}
+              className='text-gray-700 hover:text-gray-950'
+            />
           ))}
         </ul>
       </nav>
-      <div className='flex gap-7 items-center'>
+      <div className='hidden md:flex gap-7 items-center'>
         <Link href='/login' className='flex items-center gap-2.5'>
           <Image
             width={24}
@@ -69,16 +86,16 @@ export default function Header() {
           />
         </Link>
       </div>
+      <div ref={node} className='md:hidden'>
+        {open && (
+          <div
+            onClick={() => setOpen(false)}
+            className='fixed inset-0 bg-black/10 backdrop-blur-xs z-1'
+          />
+        )}
+        <Burger open={open} setOpen={setOpen} />
+        <Menu open={open} />
+      </div>
     </header>
-  );
-}
-
-function NavItem({ href, name }: { href: string; name: string }) {
-  return (
-    <li>
-      <Link href={href} className='text-gray-700 hover:text-gray-950'>
-        {name}
-      </Link>
-    </li>
   );
 }
